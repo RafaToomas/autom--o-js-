@@ -4,10 +4,17 @@ const fs = require("fs");
 const path = require("path");
 
 const app = express();
-const PORT = 3000;
+
+// ======================================================
+// CONFIGURAÇÕES
+// ======================================================
+
+const PORT = process.env.PORT || 3000;
 
 const URL =
     "https://simam.tce.pr.gov.br/Paginas/Rel_LRF.aspx?relTipo=1";
+
+const ANO_INICIAL = 2019;
 
 app.use(express.json());
 app.use(express.static(__dirname));
@@ -20,10 +27,8 @@ let municipiosCache = [];
 let pronto = false;
 
 // ======================================================
-// CONFIGURAÇÕES
+// ANO / MÊS
 // ======================================================
-
-const ANO_INICIAL = 2019;
 
 function obterAnoAtual() {
     return new Date().getFullYear();
@@ -73,6 +78,7 @@ function numeroBR(valor) {
 
     // Formato brasileiro:
     // 38.452.542,80
+
     if (texto.includes(",")) {
         texto = texto
             .replace(/\./g, "")
@@ -127,10 +133,9 @@ function encontrarNumeroBR(texto) {
         return null;
     }
 
-    const encontrados =
-        texto.match(
-            /\b\d{1,3}(?:\.\d{3})*,\d{2}\b/g
-        );
+    const encontrados = texto.match(
+        /\b\d{1,3}(?:\.\d{3})*,\d{2}\b/g
+    );
 
     if (
         !encontrados ||
@@ -186,23 +191,18 @@ function extrairValorPorMarcador(
 // ======================================================
 
 function extrairDadosRelatorio(texto) {
+
     const textoLimpo =
         limparTexto(texto);
 
     console.log("");
-    console.log(
-        "================================="
-    );
-    console.log(
-        "EXTRAINDO DADOS DO RELATÓRIO"
-    );
-    console.log(
-        "================================="
-    );
+    console.log("=================================");
+    console.log("EXTRAINDO DADOS DO RELATÓRIO");
+    console.log("=================================");
 
-    // --------------------------------------------------
+    // ==================================================
     // RCL
-    // --------------------------------------------------
+    // ==================================================
 
     const rclTexto =
         extrairValorPorMarcador(
@@ -214,9 +214,9 @@ function extrairDadosRelatorio(texto) {
             ]
         );
 
-    // --------------------------------------------------
+    // ==================================================
     // RCL AJUSTADA
-    // --------------------------------------------------
+    // ==================================================
 
     const rclAjustadaTexto =
         extrairValorPorMarcador(
@@ -227,9 +227,9 @@ function extrairDadosRelatorio(texto) {
             ]
         );
 
-    // --------------------------------------------------
+    // ==================================================
     // DESPESA TOTAL COM PESSOAL
-    // --------------------------------------------------
+    // ==================================================
 
     const dtpTexto =
         extrairValorPorMarcador(
@@ -245,28 +245,18 @@ function extrairDadosRelatorio(texto) {
     console.log(
         "VALORES ENCONTRADOS PELOS MARCADORES:"
     );
-    console.log(
-        "---------------------------------"
-    );
+    console.log("---------------------------------");
 
-    console.log(
-        "RCL:",
-        rclTexto
-    );
-
+    console.log("RCL:", rclTexto);
     console.log(
         "RCL Ajustada:",
         rclAjustadaTexto
     );
+    console.log("DTP:", dtpTexto);
 
-    console.log(
-        "DTP:",
-        dtpTexto
-    );
-
-    // --------------------------------------------------
+    // ==================================================
     // VALIDAR
-    // --------------------------------------------------
+    // ==================================================
 
     if (!rclTexto) {
         throw new Error(
@@ -286,9 +276,9 @@ function extrairDadosRelatorio(texto) {
         );
     }
 
-    // --------------------------------------------------
+    // ==================================================
     // CONVERTER
-    // --------------------------------------------------
+    // ==================================================
 
     const rcl =
         numeroBR(rclTexto);
@@ -309,9 +299,9 @@ function extrairDadosRelatorio(texto) {
         );
     }
 
-    // --------------------------------------------------
+    // ==================================================
     // PERCENTUAL
-    // --------------------------------------------------
+    // ==================================================
 
     const percentual =
         rclAjustada > 0
@@ -350,12 +340,14 @@ function extrairDadosRelatorio(texto) {
     ) {
         situacao =
             "ACIMA DO LIMITE MÁXIMO";
+
     } else if (
         percentual >=
         limitePrudencialPercentual
     ) {
         situacao =
             "LIMITE PRUDENCIAL";
+
     } else if (
         percentual >=
         limiteAlertaPercentual
@@ -369,15 +361,9 @@ function extrairDadosRelatorio(texto) {
     // ==================================================
 
     console.log("");
-    console.log(
-        "================================="
-    );
-    console.log(
-        "RESULTADO"
-    );
-    console.log(
-        "================================="
-    );
+    console.log("=================================");
+    console.log("RESULTADO");
+    console.log("=================================");
 
     console.log(
         "RCL:",
@@ -403,24 +389,24 @@ function extrairDadosRelatorio(texto) {
         "Limite de alerta:",
         formatarBR(limiteAlerta),
         "(" +
-            limiteAlertaPercentual +
-            "%)"
+        limiteAlertaPercentual +
+        "%)"
     );
 
     console.log(
         "Limite prudencial:",
         formatarBR(limitePrudencial),
         "(" +
-            limitePrudencialPercentual +
-            "%)"
+        limitePrudencialPercentual +
+        "%)"
     );
 
     console.log(
         "Limite máximo:",
         formatarBR(limiteMaximo),
         "(" +
-            limiteMaximoPercentual +
-            "%)"
+        limiteMaximoPercentual +
+        "%)"
     );
 
     console.log(
@@ -437,6 +423,7 @@ function extrairDadosRelatorio(texto) {
     // ==================================================
 
     return {
+
         rcl,
 
         rclFormatada:
@@ -456,6 +443,10 @@ function extrairDadosRelatorio(texto) {
 
         percentualFormatado:
             percentual.toFixed(2) + "%",
+
+        // IMPORTANTE:
+        // o frontend chama isso de "indice"
+        indice: percentual,
 
         limiteAlerta,
 
@@ -490,6 +481,7 @@ function calcularEvolucao(
     valorAtual,
     valorAnterior
 ) {
+
     if (
         valorAnterior === null ||
         valorAnterior === undefined ||
@@ -500,10 +492,11 @@ function calcularEvolucao(
     }
 
     return (
-        ((Number(valorAtual) -
-            Number(valorAnterior)) /
-            Number(valorAnterior)) *
-        100
+        (
+            (Number(valorAtual) -
+                Number(valorAnterior)) /
+            Number(valorAnterior)
+        ) * 100
     );
 }
 
@@ -515,6 +508,7 @@ function calcularEvolucaoAcumulada(
     valorAtual,
     valorBase
 ) {
+
     if (
         valorBase === null ||
         valorBase === undefined ||
@@ -525,10 +519,11 @@ function calcularEvolucaoAcumulada(
     }
 
     return (
-        ((Number(valorAtual) -
-            Number(valorBase)) /
-            Number(valorBase)) *
-        100
+        (
+            (Number(valorAtual) -
+                Number(valorBase)) /
+            Number(valorBase)
+        ) * 100
     );
 }
 
@@ -537,6 +532,7 @@ function calcularEvolucaoAcumulada(
 // ======================================================
 
 function formatarPercentualEvolucao(valor) {
+
     if (
         valor === null ||
         valor === undefined ||
@@ -554,7 +550,9 @@ function formatarPercentualEvolucao(valor) {
 
     return (
         sinal +
-        numero.toFixed(2).replace(".", ",") +
+        numero
+            .toFixed(2)
+            .replace(".", ",") +
         "%"
     );
 }
@@ -564,6 +562,7 @@ function formatarPercentualEvolucao(valor) {
 // ======================================================
 
 function calcularHistorico(historico) {
+
     if (
         !historico ||
         historico.length === 0
@@ -576,6 +575,7 @@ function calcularHistorico(historico) {
 
     return historico.map(
         (item, index) => {
+
             const anterior =
                 index > 0
                     ? historico[index - 1]
@@ -624,6 +624,7 @@ function calcularHistorico(historico) {
                 );
 
             return {
+
                 ...item,
 
                 evolucaoRCL,
@@ -677,16 +678,11 @@ function calcularHistorico(historico) {
 // ======================================================
 
 async function iniciarTCE() {
+
     console.log("");
-    console.log(
-        "================================="
-    );
-    console.log(
-        "INICIANDO TCE-PR"
-    );
-    console.log(
-        "================================="
-    );
+    console.log("=================================");
+    console.log("INICIANDO TCE-PR");
+    console.log("=================================");
 
     console.log(
         "Abrindo página do TCE-PR..."
@@ -694,7 +690,16 @@ async function iniciarTCE() {
 
     browser =
         await chromium.launch({
-            headless: true
+
+            headless: true,
+
+            // Necessário para ambientes Linux
+            // como o Render.
+            args: [
+                "--no-sandbox",
+                "--disable-setuid-sandbox",
+                "--disable-dev-shm-usage"
+            ]
         });
 
     context =
@@ -745,8 +750,10 @@ async function iniciarTCE() {
             .locator("option")
             .evaluateAll(
                 options => {
+
                     return options
                         .map(option => ({
+
                             id:
                                 option.value,
 
@@ -790,7 +797,9 @@ async function iniciarTCE() {
 app.get(
     "/api/status",
     (req, res) => {
+
         res.json({
+
             sucesso: true,
 
             pronto,
@@ -817,7 +826,9 @@ app.get(
 app.get(
     "/api/municipios",
     (req, res) => {
+
         res.json({
+
             sucesso: true,
 
             municipios:
@@ -833,18 +844,35 @@ app.get(
 app.get(
     "/api/entidades",
     async (req, res) => {
+
         try {
+
             const municipioId =
                 req.query.municipio;
 
             if (!municipioId) {
+
                 return res
                     .status(400)
                     .json({
+
                         sucesso: false,
 
                         erro:
                             "Município não informado."
+                    });
+            }
+
+            if (!page || !pronto) {
+
+                return res
+                    .status(503)
+                    .json({
+
+                        sucesso: false,
+
+                        erro:
+                            "O TCE-PR ainda está sendo inicializado. Aguarde alguns segundos."
                     });
             }
 
@@ -874,9 +902,11 @@ app.get(
                     )
                     .evaluateAll(
                         options => {
+
                             return options
                                 .map(
                                     option => ({
+
                                         id:
                                             option.value,
 
@@ -905,6 +935,7 @@ app.get(
             );
 
             res.json({
+
                 sucesso: true,
 
                 entidades,
@@ -913,12 +944,14 @@ app.get(
             });
 
         } catch (erro) {
+
             console.error(
                 "Erro ao carregar entidades:",
                 erro.message
             );
 
             res.status(500).json({
+
                 sucesso: false,
 
                 erro:
@@ -935,7 +968,9 @@ app.get(
 app.get(
     "/api/relatorios",
     async (req, res) => {
+
         try {
+
             const municipioId =
                 req.query.municipio;
 
@@ -943,9 +978,11 @@ app.get(
                 req.query.entidade;
 
             if (!municipioId) {
+
                 return res
                     .status(400)
                     .json({
+
                         sucesso: false,
 
                         erro:
@@ -954,9 +991,11 @@ app.get(
             }
 
             if (!entidadeId) {
+
                 return res
                     .status(400)
                     .json({
+
                         sucesso: false,
 
                         erro:
@@ -964,19 +1003,23 @@ app.get(
                     });
             }
 
+            if (!page || !pronto) {
+
+                return res
+                    .status(503)
+                    .json({
+
+                        sucesso: false,
+
+                        erro:
+                            "O TCE-PR ainda está sendo inicializado. Aguarde alguns segundos."
+                    });
+            }
+
             console.log("");
-
-            console.log(
-                "================================="
-            );
-
-            console.log(
-                "BUSCANDO RELATÓRIOS"
-            );
-
-            console.log(
-                "================================="
-            );
+            console.log("=================================");
+            console.log("BUSCANDO RELATÓRIOS");
+            console.log("=================================");
 
             await page
                 .locator(
@@ -1009,9 +1052,11 @@ app.get(
                     )
                     .evaluateAll(
                         options => {
+
                             return options
                                 .map(
                                     option => ({
+
                                         id:
                                             option.value,
 
@@ -1040,18 +1085,21 @@ app.get(
             );
 
             res.json({
+
                 sucesso: true,
 
                 relatorios
             });
 
         } catch (erro) {
+
             console.error(
                 "Erro ao carregar relatórios:",
                 erro.message
             );
 
             res.status(500).json({
+
                 sucesso: false,
 
                 erro:
@@ -1066,21 +1114,25 @@ app.get(
 // ======================================================
 
 async function consultarAno({
+
     municipioId,
     entidadeId,
     relatorioId,
     ano,
     periodo
+
 }) {
+
+    if (!page || !context) {
+
+        throw new Error(
+            "O navegador do TCE-PR ainda não está pronto."
+        );
+    }
+
     console.log("");
-
-    console.log(
-        "---------------------------------"
-    );
-
-    console.log(
-        "CONSULTANDO"
-    );
+    console.log("---------------------------------");
+    console.log("CONSULTANDO");
 
     console.log(
         "Município:",
@@ -1107,9 +1159,7 @@ async function consultarAno({
         periodo
     );
 
-    console.log(
-        "---------------------------------"
-    );
+    console.log("---------------------------------");
 
     // ==================================================
     // MUNICÍPIO
@@ -1171,6 +1221,7 @@ async function consultarAno({
     if (
         await seletorAno.count() === 0
     ) {
+
         throw new Error(
             "Seletor de ano não encontrado."
         );
@@ -1196,6 +1247,7 @@ async function consultarAno({
     if (
         await seletorPeriodo.count() > 0
     ) {
+
         const existePeriodo =
             await seletorPeriodo
                 .locator(
@@ -1206,11 +1258,14 @@ async function consultarAno({
         if (
             existePeriodo === 0
         ) {
+
             console.log(
                 "Valor do período não encontrado diretamente:",
                 periodo
             );
+
         } else {
+
             await seletorPeriodo
                 .selectOption(
                     String(periodo)
@@ -1234,6 +1289,7 @@ async function consultarAno({
     if (
         await botao.count() === 0
     ) {
+
         throw new Error(
             "Botão Consultar não encontrado."
         );
@@ -1295,6 +1351,7 @@ async function consultarAno({
     if (
         !fs.existsSync(pastaLogs)
     ) {
+
         fs.mkdirSync(
             pastaLogs,
             {
@@ -1304,11 +1361,14 @@ async function consultarAno({
     }
 
     fs.writeFileSync(
+
         path.join(
             pastaLogs,
             `relatorio_${ano}_${periodo}.txt`
         ),
+
         texto,
+
         "utf8"
     );
 
@@ -1328,7 +1388,9 @@ async function consultarAno({
     await paginaRelatorio.close();
 
     return {
+
         ano,
+
         periodo,
 
         sucesso: true,
@@ -1341,90 +1403,106 @@ async function consultarAno({
 // CONSULTA INDIVIDUAL
 // ======================================================
 
-app.get(
-    "/consultar",
+async function executarConsulta(req) {
+
+    const municipioId =
+        req.body?.municipio ||
+        req.query?.municipio;
+
+    const entidadeId =
+        req.body?.entidade ||
+        req.query?.entidade;
+
+    const relatorioId =
+        req.body?.relatorio ||
+        req.query?.relatorio;
+
+    const ano =
+        req.body?.ano ||
+        req.query?.ano ||
+        String(obterAnoAtual());
+
+    const periodo =
+        req.body?.periodo ||
+        req.query?.periodo ||
+        String(obterMesAtual());
+
+    if (!municipioId) {
+
+        throw new Error(
+            "Município não informado."
+        );
+    }
+
+    if (!entidadeId) {
+
+        throw new Error(
+            "Entidade não informada."
+        );
+    }
+
+    if (!relatorioId) {
+
+        throw new Error(
+            "Relatório não informado."
+        );
+    }
+
+    return await consultarAno({
+
+        municipioId,
+
+        entidadeId,
+
+        relatorioId,
+
+        ano,
+
+        periodo
+    });
+}
+
+// ======================================================
+// ROTA USADA PELO SEU FRONTEND
+// ======================================================
+
+app.post(
+    "/api/consulta",
     async (req, res) => {
+
         try {
-            const municipioId =
-                req.query.municipio;
-
-            const entidadeId =
-                req.query.entidade;
-
-            const relatorioId =
-                req.query.relatorio;
-
-            const ano =
-                req.query.ano ||
-                String(
-                    obterAnoAtual()
-                );
-
-            const periodo =
-                req.query.periodo ||
-                String(
-                    obterMesAtual()
-                );
-
-            if (
-                !municipioId ||
-                !entidadeId ||
-                !relatorioId
-            ) {
-                throw new Error(
-                    "Município, entidade e relatório são obrigatórios."
-                );
-            }
 
             console.log("");
-
-            console.log(
-                "================================="
-            );
-
-            console.log(
-                "CONSULTA INDIVIDUAL"
-            );
-
-            console.log(
-                "================================="
-            );
+            console.log("=================================");
+            console.log("CONSULTA RECEBIDA PELO FRONTEND");
+            console.log("=================================");
 
             const dados =
-                await consultarAno({
-                    municipioId,
-                    entidadeId,
-                    relatorioId,
-                    ano,
-                    periodo
-                });
+                await executarConsulta(req);
 
-            res.json({
-                sucesso: true,
+            // IMPORTANTE:
+            // enviamos diretamente os dados
+            // porque o seu JS espera:
+            //
+            // dados.rclAjustada
+            // dados.dtp
+            // dados.indice
 
-                dados
-            });
+            res.json(dados);
 
         } catch (erro) {
+
             console.error("");
-
-            console.error(
-                "================================="
-            );
-
-            console.error(
-                "ERRO NA CONSULTA"
-            );
-
-            console.error(
-                "================================="
-            );
+            console.error("=================================");
+            console.error("ERRO NA CONSULTA");
+            console.error("=================================");
 
             console.error(
                 erro.message
             );
 
             res.status(500).json({
+
                 sucesso: false,
 
                 erro:
@@ -1435,13 +1513,53 @@ app.get(
 );
 
 // ======================================================
-// HISTÓRICO 2019 ATÉ 2025/ANO ATUAL
+// ROTA GET ANTIGA
+// ======================================================
+
+app.get(
+    "/consultar",
+    async (req, res) => {
+
+        try {
+
+            const dados =
+                await executarConsulta(req);
+
+            res.json({
+
+                sucesso: true,
+
+                dados
+            });
+
+        } catch (erro) {
+
+            console.error(
+                "Erro na consulta:",
+                erro.message
+            );
+
+            res.status(500).json({
+
+                sucesso: false,
+
+                erro:
+                    erro.message
+            });
+        }
+    }
+);
+
+// ======================================================
+// HISTÓRICO
 // ======================================================
 
 app.get(
     "/historico",
     async (req, res) => {
+
         try {
+
             const municipioId =
                 req.query.municipio;
 
@@ -1468,18 +1586,21 @@ app.get(
                 );
 
             if (!municipioId) {
+
                 throw new Error(
                     "Município não informado."
                 );
             }
 
             if (!entidadeId) {
+
                 throw new Error(
                     "Entidade não informada."
                 );
             }
 
             if (!relatorioId) {
+
                 throw new Error(
                     "Relatório não informado."
                 );
@@ -1489,6 +1610,7 @@ app.get(
                 Number.isNaN(anoInicial) ||
                 Number.isNaN(anoFinal)
             ) {
+
                 throw new Error(
                     "Ano inicial ou final inválido."
                 );
@@ -1497,21 +1619,23 @@ app.get(
             if (
                 anoInicial > anoFinal
             ) {
+
                 throw new Error(
                     "O ano inicial não pode ser maior que o ano final."
                 );
             }
 
+            if (!page || !pronto) {
+
+                throw new Error(
+                    "O TCE-PR ainda está sendo inicializado."
+                );
+            }
+
             console.log("");
-            console.log(
-                "================================="
-            );
-            console.log(
-                "CONSULTA HISTÓRICA"
-            );
-            console.log(
-                "================================="
-            );
+            console.log("=================================");
+            console.log("CONSULTA HISTÓRICA");
+            console.log("=================================");
 
             console.log(
                 `Período: ${anoInicial} até ${anoFinal}`
@@ -1528,6 +1652,7 @@ app.get(
                 ano <= anoFinal;
                 ano++
             ) {
+
                 console.log("");
                 console.log(
                     `CONSULTANDO ANO ${ano}`
@@ -1535,11 +1660,16 @@ app.get(
 
                 const dados =
                     await consultarAno({
+
                         municipioId,
+
                         entidadeId,
+
                         relatorioId,
+
                         ano:
                             String(ano),
+
                         periodo:
                             String(periodo)
                     });
@@ -1550,15 +1680,9 @@ app.get(
             }
 
             console.log("");
-            console.log(
-                "================================="
-            );
-            console.log(
-                "CALCULANDO EVOLUÇÕES"
-            );
-            console.log(
-                "================================="
-            );
+            console.log("=================================");
+            console.log("CALCULANDO EVOLUÇÕES");
+            console.log("=================================");
 
             const resultado =
                 calcularHistorico(
@@ -1570,6 +1694,7 @@ app.get(
             );
 
             res.json({
+
                 sucesso: true,
 
                 anoInicial,
@@ -1583,6 +1708,7 @@ app.get(
             });
 
         } catch (erro) {
+
             console.error("");
 
             console.error(
@@ -1602,6 +1728,7 @@ app.get(
             );
 
             res.status(500).json({
+
                 sucesso: false,
 
                 erro:
@@ -1612,20 +1739,45 @@ app.get(
 );
 
 // ======================================================
+// ROTA DE SAÚDE DO RENDER
+// ======================================================
+
+app.get(
+    "/health",
+    (req, res) => {
+
+        res.json({
+
+            sucesso: true,
+
+            servidor: true,
+
+            tcePrPronto: pronto
+        });
+    }
+);
+
+// ======================================================
 // SERVIDOR
 // ======================================================
 
 app.listen(
     PORT,
+    "0.0.0.0",
     async () => {
+
         console.log("");
-
+        console.log("=================================");
         console.log(
-            "================================="
+            `Servidor rodando na porta ${PORT}`
         );
+        console.log("=================================");
 
         console.log(
-            `Servidor: http://localhost:${PORT}`
+            "Ambiente:",
+            process.env.RENDER
+                ? "Render"
+                : "Local"
         );
 
         console.log(
@@ -1643,14 +1795,14 @@ app.listen(
             gerarAnos()
         );
 
-        console.log(
-            "================================="
-        );
+        console.log("=================================");
 
         try {
+
             await iniciarTCE();
 
         } catch (erro) {
+
             console.error("");
 
             console.error(
@@ -1660,6 +1812,31 @@ app.listen(
             console.error(
                 erro.message
             );
+
+            pronto = false;
         }
+    }
+);
+
+// ======================================================
+// ENCERRAMENTO
+// ======================================================
+
+process.on(
+    "SIGTERM",
+    async () => {
+
+        console.log(
+            "Encerrando servidor..."
+        );
+
+        if (browser) {
+
+            await browser
+                .close()
+                .catch(() => {});
+        }
+
+        process.exit(0);
     }
 );
