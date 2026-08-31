@@ -1,0 +1,340 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --fundo: #f5f7fa;
+    --branco: #ffffff;
+    --texto: #172033;
+    --texto-secundario: #697386;
+    --borda: #e4e8ef;
+    --azul: #1769aa;
+    --azul-hover: #12578d;
+    --azul-claro: #eaf4fc;
+    --verde: #16845b;
+    --verde-claro: #e9f8f1;
+    --vermelho: #c0392b;
+    --vermelho-claro: #fdecea;
+    --sombra: 0 10px 30px rgba(23, 32, 51, 0.07);
+}
+
+body {
+    margin: 0;
+    padding: 40px 20px;
+    background: var(--fundo);
+    color: var(--texto);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+    width: 100%;
+    max-width: 950px;
+    margin: 0 auto;
+}
+
+
+/* =========================
+   CABEÇALHO
+========================= */
+
+.cabecalho {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.tag {
+    display: inline-block;
+    padding: 6px 11px;
+    border-radius: 20px;
+    background: var(--azul-claro);
+    color: var(--azul);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.cabecalho h1 {
+    margin: 12px 0 8px;
+    font-size: 36px;
+}
+
+.cabecalho p {
+    margin: 0 auto;
+    max-width: 600px;
+    color: var(--texto-secundario);
+    line-height: 1.6;
+}
+
+
+/* =========================
+   CARD
+========================= */
+
+.card,
+.resultado {
+    background: var(--branco);
+    border: 1px solid var(--borda);
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: var(--sombra);
+    margin-bottom: 22px;
+}
+
+.titulo-card {
+    margin-bottom: 25px;
+}
+
+.titulo-card h2 {
+    margin: 0 0 5px;
+    font-size: 21px;
+}
+
+.titulo-card p {
+    margin: 0;
+    color: var(--texto-secundario);
+}
+
+
+/* =========================
+   CAMPOS
+========================= */
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+}
+
+.campo label {
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+select {
+    width: 100%;
+    height: 46px;
+    padding: 0 13px;
+    border: 1px solid var(--borda);
+    border-radius: 9px;
+    background: white;
+    color: var(--texto);
+    font-size: 15px;
+    outline: none;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+select:hover {
+    border-color: #b7c0ce;
+}
+
+select:focus {
+    border-color: var(--azul);
+    box-shadow: 0 0 0 3px rgba(23, 105, 170, 0.12);
+}
+
+
+/* =========================
+   BOTÃO
+========================= */
+
+button {
+    width: 100%;
+    height: 50px;
+    margin-top: 25px;
+    border: 0;
+    border-radius: 9px;
+    background: var(--azul);
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    background: var(--azul-hover);
+}
+
+button:disabled {
+    opacity: 0.65;
+    cursor: wait;
+}
+
+
+/* =========================
+   RESULTADO
+========================= */
+
+.resultado {
+    display: none;
+}
+
+.resultado-cabecalho {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.resultado-cabecalho h2 {
+    margin: 8px 0 0;
+    font-size: 23px;
+}
+
+.resultado-tag {
+    background: var(--verde-claro);
+    color: var(--verde);
+}
+
+.status {
+    padding: 7px 12px;
+    border-radius: 20px;
+    background: var(--verde-claro);
+    color: var(--verde);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+
+/* =========================
+   CARDS DOS RESULTADOS
+========================= */
+
+.cards-resultados {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.resultado-item {
+    padding: 20px;
+    border: 1px solid var(--borda);
+    border-radius: 12px;
+    background: #fafbfc;
+}
+
+.resultado-item.destaque {
+    background: var(--azul-claro);
+    border-color: #cce3f5;
+}
+
+.resultado-label {
+    display: block;
+    margin-bottom: 10px;
+    color: var(--texto-secundario);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.resultado-item strong {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 22px;
+}
+
+.resultado-item.destaque strong {
+    color: var(--azul);
+    font-size: 28px;
+}
+
+.resultado-item small {
+    color: var(--texto-secundario);
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+
+/* =========================
+   INFORMAÇÕES
+========================= */
+
+.informacoes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 18px;
+    padding-top: 20px;
+    border-top: 1px solid var(--borda);
+}
+
+.informacoes div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.informacoes span {
+    color: var(--texto-secundario);
+    font-size: 12px;
+}
+
+.informacoes strong {
+    font-size: 14px;
+}
+
+
+/* =========================
+   MENSAGEM
+========================= */
+
+.mensagem {
+    margin-top: 18px;
+    padding: 14px;
+    border-radius: 9px;
+    background: #f5f7fa;
+    color: var(--texto-secundario);
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.mensagem.erro {
+    background: var(--vermelho-claro);
+    color: var(--vermelho);
+}
+
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media (max-width: 700px) {
+
+    body {
+        padding: 25px 15px;
+    }
+
+    .cabecalho h1 {
+        font-size: 29px;
+    }
+
+    .card,
+    .resultado {
+        padding: 20px;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cards-resultados {
+        grid-template-columns: 1fr;
+    }
+
+    .informacoes {
+        grid-template-columns: 1fr;
+    }
+
+    .resultado-cabecalho {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+}

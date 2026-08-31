@@ -1,0 +1,2057 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Análise de Viabilidade Econômica
+    </title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background:
+                #f1f5f9;
+
+            color:
+                #123b68;
+        }
+
+        header {
+            background:
+                #123f6d;
+
+            color: white;
+
+            padding:
+                28px 40px;
+        }
+
+        header h1 {
+            margin:
+                0 0 8px 0;
+
+            font-size:
+                25px;
+        }
+
+        header p {
+            margin: 0;
+
+            font-size:
+                14px;
+
+            opacity:
+                .9;
+        }
+
+        main {
+            max-width:
+                1250px;
+
+            margin:
+                24px auto;
+
+            padding:
+                0 20px;
+        }
+
+        .card {
+            background:
+                white;
+
+            border-radius:
+                12px;
+
+            padding:
+                22px;
+
+            margin-bottom:
+                20px;
+
+            box-shadow:
+                0 3px 12px
+                rgba(0, 0, 0, .08);
+        }
+
+        .card h2 {
+            margin-top:
+                0;
+
+            color:
+                #123f6d;
+
+            font-size:
+                20px;
+        }
+
+        .aviso {
+            background:
+                #eef6ff;
+
+            border-left:
+                4px solid #2176ff;
+
+            padding:
+                12px;
+
+            border-radius:
+                5px;
+
+            margin-bottom:
+                18px;
+
+            font-size:
+                13px;
+
+            color:
+                #123f6d;
+        }
+
+        .grid {
+            display:
+                grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap:
+                16px;
+        }
+
+        .campo {
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            gap:
+                7px;
+        }
+
+        .campo label {
+            font-size:
+                13px;
+
+            font-weight:
+                bold;
+
+            color:
+                #173d65;
+        }
+
+        select {
+            width:
+                100%;
+
+            height:
+                38px;
+
+            padding:
+                0 12px;
+
+            border:
+                1px solid #cbd5e1;
+
+            border-radius:
+                5px;
+
+            background:
+                white;
+
+            color:
+                #173d65;
+
+            font-size:
+                13px;
+
+            outline:
+                none;
+        }
+
+        select:focus {
+            border-color:
+                #2176ff;
+        }
+
+        .campo-largo {
+            margin-top:
+                16px;
+
+            max-width:
+                50%;
+        }
+
+        .acoes {
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                14px;
+
+            margin-top:
+                20px;
+
+            flex-wrap:
+                wrap;
+        }
+
+        button {
+            border:
+                none;
+
+            background:
+                #123f6d;
+
+            color:
+                white;
+
+            padding:
+                10px 18px;
+
+            border-radius:
+                5px;
+
+            font-weight:
+                bold;
+
+            cursor:
+                pointer;
+        }
+
+        button:hover {
+            background:
+                #0d3156;
+        }
+
+        button:disabled {
+            opacity:
+                .6;
+
+            cursor:
+                wait;
+        }
+
+        .botao-historico {
+            background:
+                #2176ff;
+        }
+
+        .botao-historico:hover {
+            background:
+                #155dcc;
+        }
+
+        #status {
+            font-size:
+                13px;
+
+            color:
+                #315b84;
+        }
+
+        .loading {
+            display:
+                none;
+
+            font-size:
+                13px;
+
+            color:
+                #315b84;
+        }
+
+        .resultado-grid {
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap:
+                10px;
+        }
+
+        .resultado-item {
+            border:
+                1px solid #d5dee8;
+
+            background:
+                #f8fafc;
+
+            border-radius:
+                7px;
+
+            padding:
+                16px;
+        }
+
+        .resultado-item .titulo {
+            display:
+                block;
+
+            font-size:
+                11px;
+
+            color:
+                #55718f;
+
+            margin-bottom:
+                7px;
+        }
+
+        .resultado-item .valor {
+            display:
+                block;
+
+            font-size:
+                17px;
+
+            font-weight:
+                bold;
+
+            color:
+                #123f6d;
+        }
+
+        .percentual-box {
+            margin-top:
+                10px;
+
+            border:
+                1px solid #d5dee8;
+
+            background:
+                #f8fafc;
+
+            border-radius:
+                7px;
+
+            padding:
+                18px;
+        }
+
+        .percentual-box .titulo {
+            display:
+                block;
+
+            font-size:
+                12px;
+
+            color:
+                #55718f;
+
+            margin-bottom:
+                6px;
+        }
+
+        .percentual {
+            font-size:
+                27px;
+
+            font-weight:
+                bold;
+
+            color:
+                #123f6d;
+        }
+
+        .situacao {
+            margin-top:
+                12px;
+
+            padding:
+                13px;
+
+            text-align:
+                center;
+
+            border-radius:
+                7px;
+
+            font-size:
+                14px;
+
+            font-weight:
+                bold;
+        }
+
+        .situacao.ok {
+            background:
+                #d9f9e5;
+
+            color:
+                #08743c;
+        }
+
+        .situacao.alerta {
+            background:
+                #fff3cd;
+
+            color:
+                #856404;
+        }
+
+        .situacao.prudencial {
+            background:
+                #ffe5b4;
+
+            color:
+                #9a5b00;
+        }
+
+        .situacao.maximo {
+            background:
+                #ffdede;
+
+            color:
+                #b42323;
+        }
+
+        .limites {
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap:
+                10px;
+
+            margin-top:
+                12px;
+        }
+
+        .limite {
+            border:
+                1px solid #d5dee8;
+
+            border-radius:
+                7px;
+
+            padding:
+                13px;
+
+            background:
+                white;
+        }
+
+        .limite strong {
+            display:
+                block;
+
+            margin-bottom:
+                6px;
+
+            font-size:
+                13px;
+        }
+
+        .limite span {
+            font-size:
+                12px;
+
+            color:
+                #315b84;
+        }
+
+        .erro {
+            background:
+                #ffe3e3;
+
+            color:
+                #a30000;
+
+            padding:
+                12px;
+
+            border-radius:
+                6px;
+
+            margin-top:
+                15px;
+
+            display:
+                none;
+
+            font-size:
+                13px;
+        }
+
+        /* =================================================
+           HISTÓRICO
+           ================================================= */
+
+        .historico {
+            display:
+                none;
+        }
+
+        .historico-info {
+            background:
+                #eef6ff;
+
+            border-left:
+                4px solid #2176ff;
+
+            padding:
+                12px;
+
+            border-radius:
+                5px;
+
+            margin-bottom:
+                18px;
+
+            font-size:
+                13px;
+        }
+
+        .tabela-container {
+            width:
+                100%;
+
+            overflow-x:
+                auto;
+
+            border:
+                1px solid #d5dee8;
+
+            border-radius:
+                8px;
+        }
+
+        table {
+            width:
+                100%;
+
+            border-collapse:
+                collapse;
+
+            min-width:
+                1250px;
+
+            font-size:
+                12px;
+        }
+
+        th {
+            background:
+                #123f6d;
+
+            color:
+                white;
+
+            padding:
+                11px 10px;
+
+            text-align:
+                center;
+
+            white-space:
+                nowrap;
+        }
+
+        td {
+            padding:
+                11px 10px;
+
+            border-bottom:
+                1px solid #e2e8f0;
+
+            text-align:
+                right;
+
+            white-space:
+                nowrap;
+        }
+
+        td:first-child {
+            text-align:
+                center;
+
+            font-weight:
+                bold;
+
+            color:
+                #123f6d;
+        }
+
+        tbody tr:hover {
+            background:
+                #f8fafc;
+        }
+
+        .evolucao-positiva {
+            color:
+                #08743c;
+
+            font-weight:
+                bold;
+        }
+
+        .evolucao-negativa {
+            color:
+                #b42323;
+
+            font-weight:
+                bold;
+        }
+
+        .evolucao-neutra {
+            color:
+                #55718f;
+        }
+
+        .situacao-tabela {
+            text-align:
+                center;
+
+            font-weight:
+                bold;
+        }
+
+        .situacao-tabela.ok {
+            color:
+                #08743c;
+        }
+
+        .situacao-tabela.alerta {
+            color:
+                #856404;
+        }
+
+        .situacao-tabela.prudencial {
+            color:
+                #9a5b00;
+        }
+
+        .situacao-tabela.maximo {
+            color:
+                #b42323;
+        }
+
+        .subtitulo-tabela {
+            margin-top:
+                22px;
+
+            margin-bottom:
+                10px;
+
+            font-size:
+                15px;
+
+            color:
+                #123f6d;
+        }
+
+        @media (max-width: 800px) {
+
+            .grid {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .campo-largo {
+                max-width:
+                    100%;
+            }
+
+            .resultado-grid {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .limites {
+                grid-template-columns:
+                    1fr;
+            }
+
+            header {
+                padding:
+                    22px;
+            }
+
+            main {
+                padding:
+                    0 12px;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<header>
+
+    <h1>
+        Análise de Viabilidade Econômica
+    </h1>
+
+    <p>
+        Consulta automatizada de informações do TCE-PR
+    </p>
+
+</header>
+
+<main>
+
+    <!-- ================================================= -->
+    <!-- CONSULTA -->
+    <!-- ================================================= -->
+
+    <section class="card">
+
+        <h2>
+            Consulta ao TCE-PR
+        </h2>
+
+        <div class="aviso">
+
+            Selecione os mesmos parâmetros utilizados
+            na consulta manual do TCE-PR.
+            Para fechamento anual, utilize dezembro.
+
+        </div>
+
+        <div class="grid">
+
+            <!-- MUNICÍPIO -->
+
+            <div class="campo">
+
+                <label for="municipio">
+                    Município
+                </label>
+
+                <select id="municipio">
+
+                    <option value="">
+                        Carregando municípios...
+                    </option>
+
+                </select>
+
+            </div>
+
+            <!-- ENTIDADE -->
+
+            <div class="campo">
+
+                <label for="entidade">
+                    Entidade
+                </label>
+
+                <select id="entidade">
+
+                    <option value="">
+                        Selecione o município primeiro
+                    </option>
+
+                </select>
+
+            </div>
+
+            <!-- RELATÓRIO -->
+
+            <div class="campo">
+
+                <label for="relatorio">
+                    Relatório
+                </label>
+
+                <select id="relatorio">
+
+                    <option value="">
+                        Selecione a entidade primeiro
+                    </option>
+
+                </select>
+
+            </div>
+
+            <!-- ANO -->
+
+            <div class="campo">
+
+                <label for="ano">
+                    Ano
+                </label>
+
+                <select id="ano">
+
+                    <option value="">
+                        Carregando anos...
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+        <!-- PERÍODO -->
+
+        <div class="campo campo-largo">
+
+            <label for="periodo">
+                Período / Mês
+            </label>
+
+            <select id="periodo">
+
+                <option value="1">
+                    Janeiro
+                </option>
+
+                <option value="2">
+                    Fevereiro
+                </option>
+
+                <option value="3">
+                    Março
+                </option>
+
+                <option value="4">
+                    Abril
+                </option>
+
+                <option value="5">
+                    Maio
+                </option>
+
+                <option value="6">
+                    Junho
+                </option>
+
+                <option value="7">
+                    Julho
+                </option>
+
+                <option value="8">
+                    Agosto
+                </option>
+
+                <option value="9">
+                    Setembro
+                </option>
+
+                <option value="10">
+                    Outubro
+                </option>
+
+                <option value="11">
+                    Novembro
+                </option>
+
+                <option value="12" selected>
+                    Dezembro
+                </option>
+
+            </select>
+
+        </div>
+
+        <div class="acoes">
+
+            <button
+                id="btnConsultar"
+                onclick="consultarTCE()"
+            >
+                Consultar TCE-PR
+            </button>
+
+            <button
+                id="btnHistorico"
+                class="botao-historico"
+                onclick="consultarHistorico()"
+            >
+                Consultar histórico 2019–2025
+            </button>
+
+            <span id="status">
+                Iniciando TCE-PR...
+            </span>
+
+            <span
+                id="loading"
+                class="loading"
+            >
+                Consultando...
+            </span>
+
+        </div>
+
+        <div
+            id="erro"
+            class="erro"
+        ></div>
+
+    </section>
+
+
+    <!-- ================================================= -->
+    <!-- RESULTADO INDIVIDUAL -->
+    <!-- ================================================= -->
+
+    <section class="card">
+
+        <h2>
+            Resultado da consulta
+        </h2>
+
+        <div class="resultado-grid">
+
+            <div class="resultado-item">
+
+                <span class="titulo">
+                    Receita Corrente Líquida
+                </span>
+
+                <span
+                    class="valor"
+                    id="rcl"
+                >
+                    -
+                </span>
+
+            </div>
+
+            <div class="resultado-item">
+
+                <span class="titulo">
+                    Receita Corrente Líquida Ajustada
+                </span>
+
+                <span
+                    class="valor"
+                    id="rclAjustada"
+                >
+                    -
+                </span>
+
+            </div>
+
+            <div class="resultado-item">
+
+                <span class="titulo">
+                    Despesa Total com Pessoal
+                </span>
+
+                <span
+                    class="valor"
+                    id="dtp"
+                >
+                    -
+                </span>
+
+            </div>
+
+        </div>
+
+        <div class="percentual-box">
+
+            <span class="titulo">
+                Percentual da despesa com pessoal
+            </span>
+
+            <span
+                class="percentual"
+                id="percentual"
+            >
+                -
+            </span>
+
+        </div>
+
+        <div
+            id="situacao"
+            class="situacao ok"
+        >
+            Aguardando consulta
+        </div>
+
+        <!-- LIMITES -->
+
+        <div class="limites">
+
+            <div class="limite">
+
+                <strong>
+                    Limite de alerta
+                </strong>
+
+                <span id="limiteAlerta">
+                    48,6% — R$ -
+                </span>
+
+            </div>
+
+            <div class="limite">
+
+                <strong>
+                    Limite prudencial
+                </strong>
+
+                <span id="limitePrudencial">
+                    51,3% — R$ -
+                </span>
+
+            </div>
+
+            <div class="limite">
+
+                <strong>
+                    Limite máximo
+                </strong>
+
+                <span id="limiteMaximo">
+                    54% — R$ -
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================================================= -->
+    <!-- HISTÓRICO -->
+    <!-- ================================================= -->
+
+    <section
+        class="card historico"
+        id="historicoCard"
+    >
+
+        <h2>
+            Histórico 2019–2025
+        </h2>
+
+        <div
+            class="historico-info"
+            id="historicoInfo"
+        >
+            Consulta histórica aguardando execução.
+        </div>
+
+        <h3 class="subtitulo-tabela">
+            Evolução da receita, despesa com pessoal e percentual
+        </h3>
+
+        <div class="tabela-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Ano
+                        </th>
+
+                        <th>
+                            Receita Corrente Líquida
+                        </th>
+
+                        <th>
+                            Evolução anual
+                        </th>
+
+                        <th>
+                            Evolução acumulada
+                        </th>
+
+                        <th>
+                            RCL Ajustada
+                        </th>
+
+                        <th>
+                            Evolução anual
+                        </th>
+
+                        <th>
+                            Evolução acumulada
+                        </th>
+
+                        <th>
+                            Despesa com Pessoal
+                        </th>
+
+                        <th>
+                            Evolução anual
+                        </th>
+
+                        <th>
+                            Evolução acumulada
+                        </th>
+
+                        <th>
+                            Percentual
+                        </th>
+
+                        <th>
+                            Situação
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="tabelaHistorico">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<script>
+
+    // =================================================
+    // ELEMENTOS
+    // =================================================
+
+    const municipio =
+        document.getElementById(
+            "municipio"
+        );
+
+    const entidade =
+        document.getElementById(
+            "entidade"
+        );
+
+    const relatorio =
+        document.getElementById(
+            "relatorio"
+        );
+
+    const ano =
+        document.getElementById(
+            "ano"
+        );
+
+    const periodo =
+        document.getElementById(
+            "periodo"
+        );
+
+    const btnConsultar =
+        document.getElementById(
+            "btnConsultar"
+        );
+
+    const btnHistorico =
+        document.getElementById(
+            "btnHistorico"
+        );
+
+    const status =
+        document.getElementById(
+            "status"
+        );
+
+    const loading =
+        document.getElementById(
+            "loading"
+        );
+
+    const erro =
+        document.getElementById(
+            "erro"
+        );
+
+    const historicoCard =
+        document.getElementById(
+            "historicoCard"
+        );
+
+    const historicoInfo =
+        document.getElementById(
+            "historicoInfo"
+        );
+
+    const tabelaHistorico =
+        document.getElementById(
+            "tabelaHistorico"
+        );
+
+    // =================================================
+    // INICIAR
+    // =================================================
+
+    window.addEventListener(
+        "DOMContentLoaded",
+        iniciar
+    );
+
+    async function iniciar() {
+
+        try {
+
+            const resposta =
+                await fetch(
+                    "/api/status"
+                );
+
+            const dados =
+                await resposta.json();
+
+            if (!dados.sucesso) {
+
+                throw new Error(
+                    "Não foi possível iniciar o sistema."
+                );
+
+            }
+
+            preencherAnos(
+                dados.anos
+            );
+
+            await carregarMunicipios();
+
+            status.textContent =
+                `TCE-PR pronto — ${dados.municipios} municípios carregados.`;
+
+        } catch (e) {
+
+            status.textContent =
+                "Erro ao iniciar TCE-PR.";
+
+            mostrarErro(
+                e.message
+            );
+
+        }
+
+    }
+
+    // =================================================
+    // ANOS
+    // =================================================
+
+    function preencherAnos(anos) {
+
+        ano.innerHTML = "";
+
+        anos
+            .slice()
+            .reverse()
+            .forEach(valor => {
+
+                const option =
+                    document.createElement(
+                        "option"
+                    );
+
+                option.value =
+                    valor;
+
+                option.textContent =
+                    valor;
+
+                ano.appendChild(
+                    option
+                );
+
+            });
+
+        if (anos.length > 0) {
+
+            ano.value =
+                anos[
+                    anos.length - 1
+                ];
+
+        }
+
+    }
+
+    // =================================================
+    // MUNICÍPIOS
+    // =================================================
+
+    async function carregarMunicipios() {
+
+        const resposta =
+            await fetch(
+                "/api/municipios"
+            );
+
+        const dados =
+            await resposta.json();
+
+        if (!dados.sucesso) {
+
+            throw new Error(
+                "Erro ao carregar municípios."
+            );
+
+        }
+
+        municipio.innerHTML =
+            `
+            <option value="">
+                Selecione o município
+            </option>
+            `;
+
+        dados.municipios
+            .forEach(item => {
+
+                const option =
+                    document.createElement(
+                        "option"
+                    );
+
+                option.value =
+                    item.id;
+
+                option.textContent =
+                    item.nome;
+
+                municipio.appendChild(
+                    option
+                );
+
+            });
+
+    }
+
+    // =================================================
+    // MUNICÍPIO ALTERADO
+    // =================================================
+
+    municipio.addEventListener(
+        "change",
+        async function() {
+
+            entidade.innerHTML =
+                `
+                <option value="">
+                    Carregando entidades...
+                </option>
+                `;
+
+            relatorio.innerHTML =
+                `
+                <option value="">
+                    Selecione a entidade primeiro
+                </option>
+                `;
+
+            if (!municipio.value) {
+
+                entidade.innerHTML =
+                    `
+                    <option value="">
+                        Selecione o município primeiro
+                    </option>
+                    `;
+
+                return;
+            }
+
+            try {
+
+                const resposta =
+                    await fetch(
+                        `/api/entidades?municipio=${encodeURIComponent(municipio.value)}`
+                    );
+
+                const dados =
+                    await resposta.json();
+
+                if (!dados.sucesso) {
+
+                    throw new Error(
+                        dados.erro ||
+                        "Erro ao carregar entidades."
+                    );
+
+                }
+
+                entidade.innerHTML =
+                    `
+                    <option value="">
+                        Selecione a entidade
+                    </option>
+                    `;
+
+                dados.entidades
+                    .forEach(item => {
+
+                        const option =
+                            document.createElement(
+                                "option"
+                            );
+
+                        option.value =
+                            item.id;
+
+                        option.textContent =
+                            item.nome;
+
+                        entidade.appendChild(
+                            option
+                        );
+
+                    });
+
+            } catch (e) {
+
+                mostrarErro(
+                    e.message
+                );
+
+            }
+
+        }
+    );
+
+    // =================================================
+    // ENTIDADE ALTERADA
+    // =================================================
+
+    entidade.addEventListener(
+        "change",
+        async function() {
+
+            relatorio.innerHTML =
+                `
+                <option value="">
+                    Carregando relatórios...
+                </option>
+                `;
+
+            if (!entidade.value) {
+
+                relatorio.innerHTML =
+                    `
+                    <option value="">
+                        Selecione a entidade primeiro
+                    </option>
+                    `;
+
+                return;
+            }
+
+            try {
+
+                const resposta =
+                    await fetch(
+                        `/api/relatorios?municipio=${encodeURIComponent(municipio.value)}&entidade=${encodeURIComponent(entidade.value)}`
+                    );
+
+                const dados =
+                    await resposta.json();
+
+                if (!dados.sucesso) {
+
+                    throw new Error(
+                        dados.erro ||
+                        "Erro ao carregar relatórios."
+                    );
+
+                }
+
+                relatorio.innerHTML =
+                    `
+                    <option value="">
+                        Selecione o relatório
+                    </option>
+                    `;
+
+                dados.relatorios
+                    .forEach(item => {
+
+                        const option =
+                            document.createElement(
+                                "option"
+                            );
+
+                        option.value =
+                            item.id;
+
+                        option.textContent =
+                            item.nome;
+
+                        relatorio.appendChild(
+                            option
+                        );
+
+                    });
+
+                // Tenta selecionar automaticamente
+                // o relatório de Despesa com Pessoal
+
+                const opcao =
+                    Array.from(
+                        relatorio.options
+                    ).find(
+                        option =>
+                            option.textContent
+                                .toUpperCase()
+                                .includes(
+                                    "DESPESA COM PESSOAL"
+                                )
+                    );
+
+                if (opcao) {
+
+                    relatorio.value =
+                        opcao.value;
+
+                }
+
+            } catch (e) {
+
+                mostrarErro(
+                    e.message
+                );
+
+            }
+
+        }
+    );
+
+    // =================================================
+    // CONSULTA INDIVIDUAL
+    // =================================================
+
+    async function consultarTCE() {
+
+        esconderErro();
+
+        if (!municipio.value) {
+
+            mostrarErro(
+                "Selecione um município."
+            );
+
+            return;
+        }
+
+        if (!entidade.value) {
+
+            mostrarErro(
+                "Selecione uma entidade."
+            );
+
+            return;
+        }
+
+        if (!relatorio.value) {
+
+            mostrarErro(
+                "Selecione um relatório."
+            );
+
+            return;
+        }
+
+        if (!ano.value) {
+
+            mostrarErro(
+                "Selecione um ano."
+            );
+
+            return;
+        }
+
+        if (!periodo.value) {
+
+            mostrarErro(
+                "Selecione um período/mês."
+            );
+
+            return;
+        }
+
+        btnConsultar.disabled =
+            true;
+
+        btnHistorico.disabled =
+            true;
+
+        loading.style.display =
+            "inline";
+
+        status.textContent =
+            "Consultando TCE-PR...";
+
+        try {
+
+            const url =
+                `/consultar?` +
+                `municipio=${encodeURIComponent(municipio.value)}` +
+                `&entidade=${encodeURIComponent(entidade.value)}` +
+                `&relatorio=${encodeURIComponent(relatorio.value)}` +
+                `&ano=${encodeURIComponent(ano.value)}` +
+                `&periodo=${encodeURIComponent(periodo.value)}`;
+
+            const resposta =
+                await fetch(url);
+
+            const dados =
+                await resposta.json();
+
+            if (!dados.sucesso) {
+
+                throw new Error(
+                    dados.erro ||
+                    "Erro na consulta."
+                );
+
+            }
+
+            mostrarResultado(
+                dados.dados
+            );
+
+            status.textContent =
+                "Consulta concluída.";
+
+        } catch (e) {
+
+            status.textContent =
+                "Erro na consulta.";
+
+            mostrarErro(
+                e.message
+            );
+
+        } finally {
+
+            btnConsultar.disabled =
+                false;
+
+            btnHistorico.disabled =
+                false;
+
+            loading.style.display =
+                "none";
+        }
+
+    }
+
+    // =================================================
+    // CONSULTAR HISTÓRICO
+    // =================================================
+
+    async function consultarHistorico() {
+
+        esconderErro();
+
+        if (!municipio.value) {
+
+            mostrarErro(
+                "Selecione um município."
+            );
+
+            return;
+        }
+
+        if (!entidade.value) {
+
+            mostrarErro(
+                "Selecione uma entidade."
+            );
+
+            return;
+        }
+
+        if (!relatorio.value) {
+
+            mostrarErro(
+                "Selecione um relatório."
+            );
+
+            return;
+        }
+
+        // =================================================
+        // PREPARAR INTERFACE
+        // =================================================
+
+        btnConsultar.disabled =
+            true;
+
+        btnHistorico.disabled =
+            true;
+
+        loading.style.display =
+            "inline";
+
+        status.textContent =
+            "Consultando histórico 2019–2025...";
+
+        historicoCard.style.display =
+            "block";
+
+        historicoInfo.textContent =
+            "Consultando os anos de 2019 até 2025. Isso pode levar alguns minutos.";
+
+        tabelaHistorico.innerHTML =
+            "";
+
+        try {
+
+            const url =
+                `/historico?` +
+                `municipio=${encodeURIComponent(municipio.value)}` +
+                `&entidade=${encodeURIComponent(entidade.value)}` +
+                `&relatorio=${encodeURIComponent(relatorio.value)}` +
+                `&periodo=${encodeURIComponent(periodo.value)}` +
+                `&anoInicial=2019` +
+                `&anoFinal=2025`;
+
+            const resposta =
+                await fetch(url);
+
+            const dados =
+                await resposta.json();
+
+            if (!dados.sucesso) {
+
+                throw new Error(
+                    dados.erro ||
+                    "Erro na consulta histórica."
+                );
+
+            }
+
+            mostrarHistorico(
+                dados.dados
+            );
+
+            historicoInfo.textContent =
+                `Consulta de ${dados.anoInicial} até ${dados.anoFinal} concluída.`;
+
+            status.textContent =
+                "Histórico concluído.";
+
+        } catch (e) {
+
+            status.textContent =
+                "Erro na consulta histórica.";
+
+            historicoInfo.textContent =
+                "Não foi possível concluir a consulta histórica.";
+
+            mostrarErro(
+                e.message
+            );
+
+        } finally {
+
+            btnConsultar.disabled =
+                false;
+
+            btnHistorico.disabled =
+                false;
+
+            loading.style.display =
+                "none";
+        }
+
+    }
+
+    // =================================================
+    // MOSTRAR RESULTADO INDIVIDUAL
+    // =================================================
+
+    function mostrarResultado(dados) {
+
+        document.getElementById(
+            "rcl"
+        ).textContent =
+            "R$ " +
+            dados.rclFormatada;
+
+        document.getElementById(
+            "rclAjustada"
+        ).textContent =
+            "R$ " +
+            dados.rclAjustadaFormatada;
+
+        document.getElementById(
+            "dtp"
+        ).textContent =
+            "R$ " +
+            dados.dtpFormatado;
+
+        document.getElementById(
+            "percentual"
+        ).textContent =
+            dados.percentualFormatado;
+
+        document.getElementById(
+            "limiteAlerta"
+        ).textContent =
+            `${dados.limiteAlertaPercentual
+                .toString()
+                .replace(".", ",")}% — R$ ${dados.limiteAlertaFormatado}`;
+
+        document.getElementById(
+            "limitePrudencial"
+        ).textContent =
+            `${dados.limitePrudencialPercentual
+                .toString()
+                .replace(".", ",")}% — R$ ${dados.limitePrudencialFormatado}`;
+
+        document.getElementById(
+            "limiteMaximo"
+        ).textContent =
+            `${dados.limiteMaximoPercentual
+                .toString()
+                .replace(".", ",")}% — R$ ${dados.limiteMaximoFormatado}`;
+
+        const situacao =
+            document.getElementById(
+                "situacao"
+            );
+
+        situacao.className =
+            "situacao";
+
+        if (
+            dados.situacao ===
+            "ACIMA DO LIMITE MÁXIMO"
+        ) {
+
+            situacao.classList.add(
+                "maximo"
+            );
+
+        } else if (
+            dados.situacao ===
+            "LIMITE PRUDENCIAL"
+        ) {
+
+            situacao.classList.add(
+                "prudencial"
+            );
+
+        } else if (
+            dados.situacao ===
+            "LIMITE DE ALERTA"
+        ) {
+
+            situacao.classList.add(
+                "alerta"
+            );
+
+        } else {
+
+            situacao.classList.add(
+                "ok"
+            );
+
+        }
+
+        situacao.textContent =
+            dados.situacao;
+    }
+
+    // =================================================
+    // MOSTRAR HISTÓRICO
+    // =================================================
+
+    function mostrarHistorico(dados) {
+
+        tabelaHistorico.innerHTML =
+            "";
+
+        dados.forEach(
+            item => {
+
+                const tr =
+                    document.createElement(
+                        "tr"
+                    );
+
+                tr.innerHTML = `
+
+                    <td>
+                        ${item.ano}
+                    </td>
+
+                    <td>
+                        R$ ${item.rclFormatada}
+                    </td>
+
+                    <td class="${classeEvolucao(item.evolucaoRCL)}">
+                        ${item.evolucaoRCLFormatada}
+                    </td>
+
+                    <td class="${classeEvolucao(item.acumuladoRCL)}">
+                        ${item.acumuladoRCLFormatado}
+                    </td>
+
+                    <td>
+                        R$ ${item.rclAjustadaFormatada}
+                    </td>
+
+                    <td class="${classeEvolucao(item.evolucaoRCLAjustada)}">
+                        ${item.evolucaoRCLAjustadaFormatada}
+                    </td>
+
+                    <td class="${classeEvolucao(item.acumuladoRCLAjustada)}">
+                        ${item.acumuladoRCLAjustadaFormatado}
+                    </td>
+
+                    <td>
+                        R$ ${item.dtpFormatado}
+                    </td>
+
+                    <td class="${classeEvolucao(item.evolucaoDTP)}">
+                        ${item.evolucaoDTPFormatada}
+                    </td>
+
+                    <td class="${classeEvolucao(item.acumuladoDTP)}">
+                        ${item.acumuladoDTPFormatado}
+                    </td>
+
+                    <td>
+                        ${item.percentualFormatado}
+                    </td>
+
+                    <td class="situacao-tabela ${classeSituacao(item.situacao)}">
+                        ${item.situacao}
+                    </td>
+
+                `;
+
+                tabelaHistorico.appendChild(
+                    tr
+                );
+
+            }
+        );
+    }
+
+    // =================================================
+    // CLASSE EVOLUÇÃO
+    // =================================================
+
+    function classeEvolucao(valor) {
+
+        if (
+            valor === null ||
+            valor === undefined ||
+            Number.isNaN(Number(valor))
+        ) {
+            return "evolucao-neutra";
+        }
+
+        if (
+            Number(valor) > 0
+        ) {
+            return "evolucao-positiva";
+        }
+
+        if (
+            Number(valor) < 0
+        ) {
+            return "evolucao-negativa";
+        }
+
+        return "evolucao-neutra";
+    }
+
+    // =================================================
+    // CLASSE SITUAÇÃO
+    // =================================================
+
+    function classeSituacao(
+        situacao
+    ) {
+
+        if (
+            situacao ===
+            "ACIMA DO LIMITE MÁXIMO"
+        ) {
+            return "maximo";
+        }
+
+        if (
+            situacao ===
+            "LIMITE PRUDENCIAL"
+        ) {
+            return "prudencial";
+        }
+
+        if (
+            situacao ===
+            "LIMITE DE ALERTA"
+        ) {
+            return "alerta";
+        }
+
+        return "ok";
+    }
+
+    // =================================================
+    // ERRO
+    // =================================================
+
+    function mostrarErro(
+        mensagem
+    ) {
+
+        erro.textContent =
+            mensagem;
+
+        erro.style.display =
+            "block";
+    }
+
+    function esconderErro() {
+
+        erro.textContent =
+            "";
+
+        erro.style.display =
+            "none";
+    }
+
+</script>
+
+</body>
+
+</html>
