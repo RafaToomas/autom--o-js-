@@ -1,0 +1,57 @@
+[
+  {
+    "texto": "",
+    "href": "https://www1.tce.pr.gov.br/",
+    "id": ""
+  },
+  {
+    "texto": "Mapa do Site",
+    "href": "https://www1.tce.pr.gov.br/mapadosite/",
+    "id": ""
+  },
+  {
+    "texto": "Ouvidoria",
+    "href": "https://www1.tce.pr.gov.br/conteudo/ouvidoria/74",
+    "id": ""
+  },
+  {
+    "texto": "Acesso à informação",
+    "href": "https://www1.tce.pr.gov.br/conteudo/acesso-a-informacao/229",
+    "id": ""
+  },
+  {
+    "texto": "",
+    "href": "https://www1.tce.pr.gov.br/conteudo/acessibilidade/1",
+    "id": ""
+  },
+  {
+    "texto": "Buscar",
+    "href": "https://simam.tce.pr.gov.br/Paginas/Rel_LRF.aspx?relTipo=1#",
+    "id": ""
+  },
+  {
+    "texto": "Consultar",
+    "href": "javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(\"ctl00$ContentPlaceHolder1$btnConsulta\", \"\", true, \"\", \"\", false, true))",
+    "id": "ContentPlaceHolder1_btnConsulta"
+  },
+  {
+    "texto": "TOPO ^",
+    "href": "https://simam.tce.pr.gov.br/Paginas/Rel_LRF.aspx?relTipo=1#",
+    "id": "A1"
+  },
+  {
+    "texto": "Buscar",
+    "href": "https://simam.tce.pr.gov.br/Paginas/Rel_LRF.aspx?relTipo=1#",
+    "id": ""
+  },
+  {
+    "texto": "",
+    "href": "https://m.tce.pr.gov.br/",
+    "id": "qrCode"
+  },
+  {
+    "texto": "Versão Mobile",
+    "href": "https://m.tce.pr.gov.br/",
+    "id": ""
+  }
+]

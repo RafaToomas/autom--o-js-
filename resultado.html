@@ -1,0 +1,923 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head id="Head1"><meta http-equiv="X-UA-Compatible" content="IE=Edge"><title>Relatórios de LRF</title>
+    <script type="text/javascript" src="js/funcoes.js"></script>    
+    <meta name="author" content="Tribunal de Contas do Estado do Paraná"><meta name="copyright" content="Tribunal de Contas do Estado do Paraná">
+    <style type="text/css">
+        .divInterno
+        {
+            float: left;
+            margin-right: 5px;
+            width: 220px;
+            text-align: right;
+        }
+        
+        .divInternoDireita
+        {
+            float: left;
+            margin-right: 21px;
+            text-align: left;
+        }
+        
+        .divExterno
+        {
+            float: left;
+            width: 100%;
+            margin-bottom: 5px;
+        }
+        
+        fieldset
+        {
+            padding: 5px;
+        }
+        
+        .fieldSetExterno
+        {
+            border: 1px solid #DEDEDE;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+        
+        legend
+        {
+            color: Gray;
+            font-size: 10px;
+            text-align: left;
+            margin: 0px;
+            font-weight: bold;
+            margin-bottom: 3px;
+            letter-spacing: 1px;
+        }
+    </style>
+    <style>
+        @font-face
+        {
+            font-family: 'Yanone';
+            src: url('fontes/yanonekaffeesatz-regular.eot');
+            src: url('fontes/yanonekaffeesatz-regular.eot?#iefix') format('embedded-opentype'), url('fontes/yanonekaffeesatz-regular.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+    </style>
+    <link href="https://www1.tce.pr.gov.br/App_Themes/Modelo/css/01modelo.css" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="https://servicos.tce.pr.gov.br/Include/Scripts/jquery/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="https://servicos.tce.pr.gov.br/Include/Scripts/jquery/ui/jquery-ui-1.8.18.custom.min.js"></script>
+    <script type="text/javascript" src="https://www1.tce.pr.gov.br/Include/Handler/MenuExterno.ashx"></script>
+    <script type="text/javascript" src="https://servicos.tce.pr.gov.br/Include/Scripts/geral.js"></script>
+    <script type="text/javascript" src="https://servicos.tce.pr.gov.br/Include/Scripts/PortalTCE.BarraAcessibilidade.js" defer="defer"></script>
+    <script type="text/javascript" src="https://servicos.tce.pr.gov.br/Include/Scripts/PortalTCE.InputPlaceholder.js" defer="defer"></script>
+    <script type="text/javascript" src="https://servicos.tce.pr.gov.br/Include/Scripts/PortalTCE.Busca.js" defer="defer"></script>
+    <script type="text/javascript" src="https://servicos.tce.pr.gov.br/Include/Scripts/PortalTCE.Favoritos.js" defer="defer"></script>
+    <script type="text/javascript" src="https://servicos.tce.pr.gov.br/Include/Scripts/PortalTCE.PinningFavoritos.js" defer="defer"></script>
+    <script type="text/javascript" src="https://servicos.tce.pr.gov.br/Include/Scripts/PortalTCE.DropDown.js" defer="defer"></script>
+    <script type="text/javascript" src="https://servicos.tce.pr.gov.br/Include/Scripts/PortalTCE.DropDownFavoritos.js" defer="defer"></script>
+    <script type="text/javascript" src="https://servicos.tce.pr.gov.br/Include/Scripts/PortalTCE.QRCode.js" defer="defer"></script>
+    <script type="text/javascript" src="https://servicos.tce.pr.gov.br/Include/Scripts/PortalTCE.Sanfona.js" defer="defer"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+
+            var dropDownExemplo = Object.create(PortalTCE.DropDown);
+
+            jQuery("#txtCalendario").datepicker({
+                showOn: 'button',
+                buttonText: '',
+                nextText: '>>',
+                prevText: '<<',
+                dateFormat: "dd/mm/yy",
+                dayNames: ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"],
+                dayNamesMin: ["D", "S", "T", "Q", "Q", "S", "S"],
+                dayNamesShort: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+                monthNames: ["Janeiro", "fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
+                monthNamesShort: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
+                weekHeader: "Sm",
+                changeMonth: true,
+                changeYear: true
+            });
+
+            dropDownExemplo.construct('#dropDownConteiner', '#dropDownRotulo');
+
+        });
+    </script>
+    <link href="https://servicos.tce.pr.gov.br/favicon.ico" rel="shortcut icon"><link href="../App_Themes/Modelo/css/01modelo.css" type="text/css" rel="stylesheet"><link href="../App_Themes/Modelo/css/Modelo.css" type="text/css" rel="stylesheet"></head>
+<body topmargin="0" leftmargin="0" marginwidth="0" marginheight="0">
+    <div class="conteiner">
+        <!--[if lte IE 8]><div class="IE_cabecalho"><![endif]-->
+        <header>
+            <h1>
+                <a href="https://www1.tce.pr.gov.br/" tabindex="1">
+                    <img alt="Tribunal de Contas do Estado do Paraná" src="https://servicos.tce.pr.gov.br/App_themes/Tema1/imagem/logo-tce-pr.png"></a></h1>
+            
+            <div id="divmenuAcessoBusca">
+            
+            <div class="barraSuperior">
+                <ul class="menu ajuda">
+                    <li><a href="https://www1.tce.pr.gov.br/mapadosite/" title="Mapa do Site">Mapa do Site</a></li><li>
+                        <a href="https://www1.tce.pr.gov.br/conteudo/ouvidoria/74" title="Ouvidoria">Ouvidoria</a></li><li>
+                            <a href="https://www1.tce.pr.gov.br/conteudo/acesso-a-informacao/229" title="Acesso à informação">
+                                Acesso à informação</a></li></ul>
+                <ul id="barraAcessibilidade" class="barraDeAcessibilidade">
+                    <li>
+                        <button type="button" title="Tamanho de fonte normal" id="botaoResetarFonte" class="botaoResetarFonte">
+                        </button>
+                    </li>
+                    <li>
+                        <button type="button" title="Aumentar fonte" id="botaoAumentarFonte" class="botaoAumentarFonte">
+                        </button>
+                    </li>
+                    <li>
+                        <button type="button" title="Diminuir fonte" id="botaoDiminuirFonte" class="botaoDiminuirFonte">
+                        </button>
+                    </li>
+                    <li>
+                        <input type="submit" name="btnContraste" value="" id="btnContraste" title="Alto Contraste" class="botaoContraste"></li><li><a href="https://www1.tce.pr.gov.br/conteudo/acessibilidade/1" title="Acessibilidade"></a></li>
+                </ul>
+            </div>
+            <!-- Preciso mudar a cor do texto quando muda o foco -->
+            <div class="busca">
+                <input id="txtPesquisaTopo" type="text" maxlength="200" onkeydown="if(IsEnterKey(event)){{RedirecionarBusca('txtPesquisaTopo');return false;}}" placeholder="Ex.: Lei orgânica, Instrução Normativa, Regimento Interno..." class="ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true"><a href="#" title="Buscar" onclick="RedirecionarBusca('txtPesquisaTopo');return false;">Buscar</a></div>
+            </div>
+        </header>
+        <!--[if lte IE 8]></div><![endif]-->
+        <nav>
+            <div id="divMenuTCE"></div>
+        </nav>
+        <!-- Barra lateral esquerda contendo menu e favoritos -->
+        <div class="coluna esquerda" style="margin-right: 28px;">
+            <!-- Box dos favoritos -->
+            <div id="coluna_esquerda">
+                <div id="conteudo">
+                </div>
+            </div>
+        </div>
+        <!-- Colocar conteúdo aqui -->
+        <div class="coluna">
+            <form method="post" action="./Rel_LRF.aspx?relTipo=1" onsubmit="javascript:return WebForm_OnSubmit();" id="form2" target="_blank">
+<div class="aspNetHidden">
+
+
+
+
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['form2'];
+if (!theForm) {
+    theForm = document.form2;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="/WebResource.axd?d=kU3WHpAnCCwtEoO-06pOUT0rTk3dHtLKTyyFvBeysaYDaCIXL6xaMfGqVQBiGtYNWE6WFRu1r6epH2dLG-Lokfjx6Zwm5FXTxcnhd6qWnkM1&amp;t=639190725332169432" type="text/javascript"></script>
+
+
+<script src="/ScriptResource.axd?d=W34WZnxNFrbAuxk_TxjaTHhXXfi5U5zScOAmtk1FLJ942A55HmVUCFywbLazX7RtNFYnqZU7KKnOwZHAE0B2DEtch9SX_uH6Ox7--46SG9ki9omVJcF_COto9IeU2akuz9Ep0C5fhU_Sr-ItqcQv0aMAR1Tzyoa8il4WAzWRWEc1&amp;t=ffffffffa5405632" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+var __cultureInfo = {"name":"pt-BR","numberFormat":{"CurrencyDecimalDigits":2,"CurrencyDecimalSeparator":",","IsReadOnly":true,"CurrencyGroupSizes":[3],"NumberGroupSizes":[3],"PercentGroupSizes":[3],"CurrencyGroupSeparator":".","CurrencySymbol":"R$","NaNSymbol":"NaN","CurrencyNegativePattern":9,"NumberNegativePattern":1,"PercentPositivePattern":1,"PercentNegativePattern":1,"NegativeInfinitySymbol":"-∞","NegativeSign":"-","NumberDecimalDigits":2,"NumberDecimalSeparator":",","NumberGroupSeparator":".","CurrencyPositivePattern":2,"PositiveInfinitySymbol":"∞","PositiveSign":"+","PercentDecimalDigits":2,"PercentDecimalSeparator":",","PercentGroupSeparator":".","PercentSymbol":"%","PerMilleSymbol":"‰","NativeDigits":["0","1","2","3","4","5","6","7","8","9"],"DigitSubstitution":1},"dateTimeFormat":{"AMDesignator":"","Calendar":{"MinSupportedDateTime":"\/Date(-62135589600000)\/","MaxSupportedDateTime":"\/Date(253402300799999)\/","AlgorithmType":1,"CalendarType":1,"Eras":[1],"TwoDigitYearMax":2029,"IsReadOnly":true},"DateSeparator":"/","FirstDayOfWeek":0,"CalendarWeekRule":0,"FullDateTimePattern":"dddd, d\u0027 de \u0027MMMM\u0027 de \u0027yyyy HH:mm:ss","LongDatePattern":"dddd, d\u0027 de \u0027MMMM\u0027 de \u0027yyyy","LongTimePattern":"HH:mm:ss","MonthDayPattern":"d \u0027de\u0027 MMMM","PMDesignator":"","RFC1123Pattern":"ddd, dd MMM yyyy HH\u0027:\u0027mm\u0027:\u0027ss \u0027GMT\u0027","ShortDatePattern":"dd/MM/yyyy","ShortTimePattern":"HH:mm","SortableDateTimePattern":"yyyy\u0027-\u0027MM\u0027-\u0027dd\u0027T\u0027HH\u0027:\u0027mm\u0027:\u0027ss","TimeSeparator":":","UniversalSortableDateTimePattern":"yyyy\u0027-\u0027MM\u0027-\u0027dd HH\u0027:\u0027mm\u0027:\u0027ss\u0027Z\u0027","YearMonthPattern":"MMMM\u0027 de \u0027yyyy","AbbreviatedDayNames":["dom","seg","ter","qua","qui","sex","sáb"],"ShortestDayNames":["D","S","T","Q","Q","S","S"],"DayNames":["domingo","segunda-feira","terça-feira","quarta-feira","quinta-feira","sexta-feira","sábado"],"AbbreviatedMonthNames":["jan","fev","mar","abr","mai","jun","jul","ago","set","out","nov","dez",""],"MonthNames":["janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro",""],"IsReadOnly":true,"NativeCalendarName":"Calendário gregoriano","AbbreviatedMonthGenitiveNames":["jan","fev","mar","abr","mai","jun","jul","ago","set","out","nov","dez",""],"MonthGenitiveNames":["janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro",""]},"eras":[1,"d.C.",null,0]};//]]>
+</script>
+
+<script src="/ScriptResource.axd?d=cDfdVSSj59hih7xukjAS3n8BQDlAhWAdehyAyXNyX4zegh7RAqXZZo3DyYuJtiy_BR8Gzghi9Htb0_zn0yUlBZI5I4H4qnuDq9ObYFZmG03HZ-zcBv1mSMFT9WUJYYomvptMc-R5KgX-hIJ-wqB4_7U7h8dx67L_vWWMxZ8Km481&amp;t=ffffffffbec1863d" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=m8DogzprFx2adVdLAON0qgE4Cum64FV9jiQkTs4BFb62tgZHa6c-m6JvDmJhQhDJUvasJ9ES72mAKHCAcdF6YKxjcDG5DT3EvtidCPU3xGXsvRpNDoe4tcR6brLb6OwFS_Pc5iOO8vj5tXKtjpUhSnH2nvDnGxD7Fq_fm9dokfWCYObY2o2QbE6KQT0gc8Sd0&amp;t=ffffffffbec1863d" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+function WebForm_OnSubmit() {
+if (typeof(ValidatorOnSubmit) == "function" && ValidatorOnSubmit() == false) return false;
+return true;
+}
+//]]>
+</script>
+
+<div class="aspNetHidden">
+
+	
+	
+</div>
+            <script type="text/javascript">
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManagerMaster', 'form2', ['tctl00$ContentPlaceHolder1$upFiltros','ContentPlaceHolder1_upFiltros'], [], [], 90, 'ctl00');
+//]]>
+</script>
+
+            <div>
+                
+    <h1>
+        <span id="ContentPlaceHolder1_lblTitulo">Relatórios da LRF - a partir de 2013</span></h1>
+    <div class="divExterno">
+        <div id="ContentPlaceHolder1_pnlRelatoriosLRF">
+	
+            <h3 class="titulo">
+                Instruções</h3>
+            <ul class="instrucoes">
+
+                <li>
+                    
+                    <span id="ContentPlaceHolder1_lblInstrucao"><strong>Condições para emissão do relatório.</strong><br>Os Relatórios são gerados durante a noite, na mesma data do fechamento da remessa dos dados da entidade junto ao Tribunal de Contas.<br>Relatórios consolidados exigem que <strong><span style="color:red;">todas as entidades do município obrigadas a prestar contas</span></strong> tenham encaminhado e validado seus dados. Quando esta condição não for atendida o solicitante será informado e o relatório não será gerado.</span>
+
+
+                </li>
+            </ul>
+            <br>
+            <br>
+            <div id="ContentPlaceHolder1_updateProgressFiltros" style="display:none;text-align: center;" role="status" aria-hidden="true">
+		
+                    <img alt="" src="../Imagens/ajax_carregando.gif"><h5>
+                        Carregando...</h5>
+                
+	</div>
+            <br>
+            <div id="ContentPlaceHolder1_upFiltros">
+                    <table width="70%" align="left" border="0" id="tblFiltros">
+                        <tbody><tr id="ContentPlaceHolder1_label_tipo">
+	<td colspan="3">
+                                <span id="ContentPlaceHolder1_lblTipo">Tipo</span>
+                            </td>
+</tr>
+
+                        <tr id="ContentPlaceHolder1_combo_tipo">
+	<td colspan="3">
+                                <select name="ctl00$ContentPlaceHolder1$ddlTipo" onchange="javascript:setTimeout('__doPostBack(\'ctl00$ContentPlaceHolder1$ddlTipo\',\'\')', 0)" id="ContentPlaceHolder1_ddlTipo">
+		<option value="">Selecione o Tipo</option>
+		<option selected="selected" value="1">Município</option>
+		<option value="2">Consórcio Intermunicipal</option>
+
+	</select>
+                                <br>
+                                <span id="ContentPlaceHolder1_RequiredFieldValidator_Tipo" style="color:Red;visibility:hidden;">Tipo deve ser informado</span>
+                            </td>
+</tr>
+
+                        <tr id="ContentPlaceHolder1_label_municipio">
+	<td colspan="3">
+                                <span id="ContentPlaceHolder1_lblMunicipio">Município</span>
+                            </td>
+</tr>
+
+                        <tr id="ContentPlaceHolder1_combo_municipio">
+	<td colspan="3">
+                                <select name="ctl00$ContentPlaceHolder1$ddlMunicipio" onchange="javascript:setTimeout('__doPostBack(\'ctl00$ContentPlaceHolder1$ddlMunicipio\',\'\')', 0)" id="ContentPlaceHolder1_ddlMunicipio" style="width: 500px; max-width: 500px">
+		<option value="">Selecione um Município</option>
+		<option value="9">ABATIÁ                                  </option>
+		<option value="33">ADRIANÓPOLIS                            </option>
+		<option value="77">AGUDOS DO SUL                           </option>
+		<option value="124">ALMIRANTE TAMANDARÉ                     </option>
+		<option value="134">ALTAMIRA DO PARANÁ                      </option>
+		<option value="157">ALTO PARAÍSO                            </option>
+		<option value="159">ALTO PARANÁ                             </option>
+		<option value="161">ALTO PIQUIRI                            </option>
+		<option value="166">ALTÔNIA                                 </option>
+		<option value="182">ALVORADA DO SUL                         </option>
+		<option value="187">AMAPORÃ                                 </option>
+		<option value="208">AMPÉRE                                  </option>
+		<option value="211">ANAHY                                   </option>
+		<option value="226">ANDIRÁ                                  </option>
+		<option value="243">ÂNGULO                                  </option>
+		<option value="254">ANTONINA                                </option>
+		<option value="264">ANTÔNIO OLINTO                          </option>
+		<option value="284">APUCARANA                               </option>
+		<option value="332">ARAPONGAS                               </option>
+		<option value="334">ARAPOTI                                 </option>
+		<option value="335">ARAPUÃ                                  </option>
+		<option value="350">ARARUNA                                 </option>
+		<option selected="selected" value="356">ARAUCÁRIA                               </option>
+		<option value="382">ARIRANHA DO IVAÍ                        </option>
+		<option value="404">ASSAÍ                                   </option>
+		<option value="408">ASSIS CHATEAUBRIAND                     </option>
+		<option value="413">ASTORGA                                 </option>
+		<option value="415">ATALAIA                                 </option>
+		<option value="468">BALSA NOVA                              </option>
+		<option value="479">BANDEIRANTES                            </option>
+		<option value="496">BARBOSA FERRAZ                          </option>
+		<option value="519">BARRA DO JACARÉ                         </option>
+		<option value="534">BARRACÃO                                </option>
+		<option value="567">BELA VISTA DA CAROBA                    </option>
+		<option value="571">BELA VISTA DO PARAÍSO                   </option>
+		<option value="625">BITURUNA                                </option>
+		<option value="629">BOA ESPERANÇA                           </option>
+		<option value="630">BOA ESPERANÇA DO IGUAÇU                 </option>
+		<option value="635">BOA VENTURA DE SÃO ROQUE                </option>
+		<option value="639">BOA VISTA DA APARECIDA                  </option>
+		<option value="653">BOCAIÚVA DO SUL                         </option>
+		<option value="682">BOM JESUS DO SUL                        </option>
+		<option value="694">BOM SUCESSO                             </option>
+		<option value="697">BOM SUCESSO DO SUL                      </option>
+		<option value="724">BORRAZÓPOLIS                            </option>
+		<option value="736">BRAGANEY                                </option>
+		<option value="742">BRASILÂNDIA DO SUL                      </option>
+		<option value="865">CAFEARA                                 </option>
+		<option value="866">CAFELÂNDIA                              </option>
+		<option value="868">CAFEZAL DO SUL                          </option>
+		<option value="902">CALIFÓRNIA                              </option>
+		<option value="915">CAMBARÁ                                 </option>
+		<option value="917">CAMBÉ                                   </option>
+		<option value="918">CAMBIRA                                 </option>
+		<option value="933">CAMPINA DA LAGOA                        </option>
+		<option value="936">CAMPINA DO SIMÃO                        </option>
+		<option value="938">CAMPINA GRANDE DO SUL                   </option>
+		<option value="955">CAMPO BONITO                            </option>
+		<option value="958">CAMPO DO TENENTE                        </option>
+		<option value="965">CAMPO LARGO                             </option>
+		<option value="968">CAMPO MAGRO                             </option>
+		<option value="970">CAMPO MOURÃO                            </option>
+		<option value="1008">CÂNDIDO DE ABREU                        </option>
+		<option value="1015">CANDÓI                                  </option>
+		<option value="1030">CANTAGALO                               </option>
+		<option value="1037">CAPANEMA                                </option>
+		<option value="1063">CAPITÃO LEÔNIDAS MARQUES                </option>
+		<option value="1079">CARAMBEÍ                                </option>
+		<option value="1109">CARLÓPOLIS                              </option>
+		<option value="1148">CASCAVEL                                </option>
+		<option value="1164">CASTRO                                  </option>
+		<option value="1170">CATANDUVAS                              </option>
+		<option value="1204">CENTENÁRIO DO SUL                       </option>
+		<option value="1216">CERRO AZUL                              </option>
+		<option value="1224">CÉU AZUL                                </option>
+		<option value="1250">CHOPINZINHO                             </option>
+		<option value="1257">CIANORTE                                </option>
+		<option value="1259">CIDADE GAÚCHA                           </option>
+		<option value="1271">CLEVELÂNDIA                             </option>
+		<option value="1297">COLOMBO                                 </option>
+		<option value="1302">COLORADO                                </option>
+		<option value="1348">CONGONHINHAS                            </option>
+		<option value="1351">CONSELHEIRO MAIRINCK                    </option>
+		<option value="1356">CONTENDA                                </option>
+		<option value="1363">CORBÉLIA                                </option>
+		<option value="1375">CORNÉLIO PROCÓPIO                       </option>
+		<option value="1382">CORONEL DOMINGOS SOARES                 </option>
+		<option value="1394">CORONEL VIVIDA                          </option>
+		<option value="1410">CORUMBATAÍ DO SUL                       </option>
+		<option value="1459">CRUZ MACHADO                            </option>
+		<option value="1463">CRUZEIRO DO IGUAÇU                      </option>
+		<option value="1464">CRUZEIRO DO OESTE                       </option>
+		<option value="1467">CRUZEIRO DO SUL                         </option>
+		<option value="1470">CRUZMALTINA                             </option>
+		<option value="1490">CURITIBA                                </option>
+		<option value="1492">CURIÚVA                                 </option>
+		<option value="1534">DIAMANTE DO NORTE                       </option>
+		<option value="1535">DIAMANTE D'OESTE                        </option>
+		<option value="1536">DIAMANTE DO SUL                         </option>
+		<option value="1569">DOIS VIZINHOS                           </option>
+		<option value="1600">DOURADINA                               </option>
+		<option value="1604">DOUTOR CAMARGO                          </option>
+		<option value="1609">DOUTOR ULYSSES                          </option>
+		<option value="1644">ENÉAS MARQUES                           </option>
+		<option value="1645">ENGENHEIRO BELTRÃO                      </option>
+		<option value="1655">ENTRE RIOS DO OESTE                     </option>
+		<option value="1677">ESPERANÇA NOVA                          </option>
+		<option value="1681">ESPIGÃO ALTO DO IGUAÇU                  </option>
+		<option value="1724">FAROL                                   </option>
+		<option value="1731">FAXINAL                                 </option>
+		<option value="1736">FAZENDA RIO GRANDE                      </option>
+		<option value="1752">FÊNIX                                   </option>
+		<option value="1753">FERNANDES PINHEIRO                      </option>
+		<option value="1766">FIGUEIRA                                </option>
+		<option value="1774">FLOR DA SERRA DO SUL                    </option>
+		<option value="1777">FLORAÍ                                  </option>
+		<option value="1785">FLORESTA                                </option>
+		<option value="1790">FLORESTÓPOLIS                           </option>
+		<option value="1794">FLÓRIDA                                 </option>
+		<option value="1803">FORMOSA DO OESTE                        </option>
+		<option value="1819">FOZ DO IGUAÇU                           </option>
+		<option value="1820">FOZ DO JORDÃO                           </option>
+		<option value="1824">FRANCISCO ALVES                         </option>
+		<option value="1827">FRANCISCO BELTRÃO                       </option>
+		<option value="1879">GENERAL CARNEIRO                        </option>
+		<option value="1898">GODOY MOREIRA                           </option>
+		<option value="1913">GOIOERE                                 </option>
+		<option value="1914">GOIOXIM                                 </option>
+		<option value="1939">GRANDES RIOS                            </option>
+		<option value="1958">GUAÍRA                                  </option>
+		<option value="1960">GUAIRAÇÁ                                </option>
+		<option value="1966">GUAMIRANGA                              </option>
+		<option value="1973">GUAPIRAMA                               </option>
+		<option value="1976">GUAPOREMA                               </option>
+		<option value="1980">GUARACI                                 </option>
+		<option value="1995">GUARANIAÇU                              </option>
+		<option value="1999">GUARAPUAVA                              </option>
+		<option value="2000">GUARAQUEÇABA                            </option>
+		<option value="2006">GUARATUBA                               </option>
+		<option value="2042">HONÓRIO SERPA                           </option>
+		<option value="2058">IBAITI                                  </option>
+		<option value="2064">IBEMA                                   </option>
+		<option value="2081">IBIPORÃ                                 </option>
+		<option value="2108">ICARAÍMA                                </option>
+		<option value="2136">IGUARAÇU                                </option>
+		<option value="2140">IGUATU                                  </option>
+		<option value="2154">IMBAÚ                                   </option>
+		<option value="2158">IMBITUVA                                </option>
+		<option value="2162">INÁCIO MARTINS                          </option>
+		<option value="2165">INAJÁ                                   </option>
+		<option value="2173">INDIANÓPOLIS                            </option>
+		<option value="2211">IPIRANGA                                </option>
+		<option value="2218">IPORÃ                                   </option>
+		<option value="2233">IRACEMA DO OESTE                        </option>
+		<option value="2247">IRATI                                   </option>
+		<option value="2250">IRETAMA                                 </option>
+		<option value="2285">ITAGUAJÉ                                </option>
+		<option value="2297">ITAIPULÂNDIA                            </option>
+		<option value="2316">ITAMBARACÁ                              </option>
+		<option value="2318">ITAMBÉ                                  </option>
+		<option value="2340">ITAPEJARA D'OESTE                       </option>
+		<option value="2343">ITAPERUÇU                               </option>
+		<option value="2400">ITAÚNA DO SUL                           </option>
+		<option value="2426">IVAÍ                                    </option>
+		<option value="2427">IVAIPORÃ                                </option>
+		<option value="2428">IVATÉ                                   </option>
+		<option value="2429">IVATUBA                                 </option>
+		<option value="2438">JABOTI                                  </option>
+		<option value="2448">JACAREZINHO                             </option>
+		<option value="2461">JAGUAPITÃ                               </option>
+		<option value="2469">JAGUARIAÍVA                             </option>
+		<option value="2484">JANDAIA DO SUL                          </option>
+		<option value="2490">JANIÓPOLIS                              </option>
+		<option value="2498">JAPIRA                                  </option>
+		<option value="2503">JAPURÁ                                  </option>
+		<option value="2512">JARDIM ALEGRE                           </option>
+		<option value="2517">JARDIM OLINDA                           </option>
+		<option value="2524">JATAIZINHO                              </option>
+		<option value="2549">JESUÍTAS                                </option>
+		<option value="2574">JOAQUIM TÁVORA                          </option>
+		<option value="2611">JUNDIAÍ DO SUL                          </option>
+		<option value="2619">JURANDA                                 </option>
+		<option value="2630">JUSSARA                                 </option>
+		<option value="2637">KALORÉ                                  </option>
+		<option value="2706">LAPA                                    </option>
+		<option value="2709">LARANJAL                                </option>
+		<option value="2714">LARANJEIRAS DO SUL                      </option>
+		<option value="2735">LEÓPOLIS                                </option>
+		<option value="2739">LIDIANÓPOLIS                            </option>
+		<option value="2748">LINDOESTE                               </option>
+		<option value="2758">LOANDA                                  </option>
+		<option value="2759">LOBATO                                  </option>
+		<option value="2761">LONDRINA                                </option>
+		<option value="2781">LUIZIANA                                </option>
+		<option value="2784">LUNARDELLI                              </option>
+		<option value="2786">LUPIONÓPOLIS                            </option>
+		<option value="2841">MALLET                                  </option>
+		<option value="2845">MAMBORÊ                                 </option>
+		<option value="2854">MANDAGUAÇU                              </option>
+		<option value="2855">MANDAGUARI                              </option>
+		<option value="2856">MANDIRITUBA                             </option>
+		<option value="2858">MANFRINÓPOLIS                           </option>
+		<option value="2861">MANGUEIRINHA                            </option>
+		<option value="2866">MANOEL RIBAS                            </option>
+		<option value="2910">MARECHAL CÂNDIDO RONDON                 </option>
+		<option value="2917">MARIA HELENA                            </option>
+		<option value="2918">MARIALVA                                </option>
+		<option value="2928">MARILÂNDIA DO SUL                       </option>
+		<option value="2929">MARILENA                                </option>
+		<option value="2931">MARILUZ                                 </option>
+		<option value="2932">MARINGÁ                                 </option>
+		<option value="2935">MARIÓPOLIS                              </option>
+		<option value="2936">MARIPÁ                                  </option>
+		<option value="2941">MARMELEIRO                              </option>
+		<option value="2944">MARQUINHO                               </option>
+		<option value="2951">MARUMBI                                 </option>
+		<option value="2966">MATELÂNDIA                              </option>
+		<option value="2976">MATINHOS                                </option>
+		<option value="2981">MATO RICO                               </option>
+		<option value="2993">MAUÁ DA SERRA                           </option>
+		<option value="3003">MEDIANEIRA                              </option>
+		<option value="3011">MERCEDES                                </option>
+		<option value="3045">MIRADOR                                 </option>
+		<option value="3059">MIRASELVA                               </option>
+		<option value="3066">MISSAL                                  </option>
+		<option value="3138">MOREIRA SALES                           </option>
+		<option value="3142">MORRETES                                </option>
+		<option value="3182">MUNHOZ DE MELLO                         </option>
+		<option value="3245">NOSSA SENHORA DAS GRAÇAS                </option>
+		<option value="3252">NOVA ALIANÇA DO IVAÍ                    </option>
+		<option value="3256">NOVA AMÉRICA DA COLINA                  </option>
+		<option value="3260">NOVA AURORA                             </option>
+		<option value="3273">NOVA CANTU                              </option>
+		<option value="3280">NOVA ESPERANÇA                          </option>
+		<option value="3282">NOVA ESPERANÇA DO SUDOESTE              </option>
+		<option value="3285">NOVA FÁTIMA                             </option>
+		<option value="3304">NOVA LARANJEIRAS                        </option>
+		<option value="3306">NOVA LONDRINA                           </option>
+		<option value="3316">NOVA OLÍMPIA                            </option>
+		<option value="3329">NOVA PRATA DO IGUAÇU                    </option>
+		<option value="3337">NOVA SANTA BÁRBARA                      </option>
+		<option value="3339">NOVA SANTA ROSA                         </option>
+		<option value="3342">NOVA TEBAS                              </option>
+		<option value="3369">NOVO ITACOLOMI                          </option>
+		<option value="3426">ORTIGUEIRA                              </option>
+		<option value="3437">OURIZONA                                </option>
+		<option value="3450">OURO VERDE DO OESTE                     </option>
+		<option value="3470">PAIÇANDU                                </option>
+		<option value="3489">PALMAS                                  </option>
+		<option value="3493">PALMEIRA                                </option>
+		<option value="3507">PALMITAL                                </option>
+		<option value="3512">PALOTINA                                </option>
+		<option value="3537">PARAÍSO DO NORTE                        </option>
+		<option value="3546">PARANACITY                              </option>
+		<option value="3547">PARANAGUÁ                               </option>
+		<option value="3552">PARANAPOEMA                             </option>
+		<option value="3556">PARANAVAÍ                               </option>
+		<option value="3602">PATO BRAGADO                            </option>
+		<option value="3603">PATO BRANCO                             </option>
+		<option value="3619">PAULA FREITAS                           </option>
+		<option value="3630">PAULO FRONTIN                           </option>
+		<option value="3638">PEABIRU                                 </option>
+		<option value="3707">PEROBAL                                 </option>
+		<option value="3708">PÉROLA                                  </option>
+		<option value="3709">PEROLA D'OESTE                          </option>
+		<option value="3735">PIÊN                                    </option>
+		<option value="3757">PINHAIS                                 </option>
+		<option value="3759">PINHAL DE SÃO BENTO                     </option>
+		<option value="3761">PINHALÃO                                </option>
+		<option value="3765">PINHÃO                                  </option>
+		<option value="3786">PIRAÍ DO SUL                            </option>
+		<option value="3803">PIRAQUARA                               </option>
+		<option value="3817">PITANGA                                 </option>
+		<option value="3818">PITANGUEIRAS                            </option>
+		<option value="3828">PLANALTINA DO PARANÁ                    </option>
+		<option value="3831">PLANALTO                                </option>
+		<option value="3863">PONTA GROSSA                            </option>
+		<option value="3867">PONTAL DO PARANÁ                        </option>
+		<option value="3890">PORECATU                                </option>
+		<option value="3904">PORTO AMAZONAS                          </option>
+		<option value="3905">PORTO BARREIRO                          </option>
+		<option value="3926">PORTO RICO                              </option>
+		<option value="3932">PORTO VITÓRIA                           </option>
+		<option value="3950">PRADO FERREIRA                          </option>
+		<option value="3957">PRANCHITA                               </option>
+		<option value="3968">PRESIDENTE CASTELO BRANCO               </option>
+		<option value="3996">PRIMEIRO DE MAIO                        </option>
+		<option value="4005">PRUDENTÓPOLIS                           </option>
+		<option value="4013">QUARTO CENTENÁRIO                       </option>
+		<option value="4015">QUATIGUÁ                                </option>
+		<option value="4018">QUATRO BARRAS                           </option>
+		<option value="4019">QUATRO PONTES                           </option>
+		<option value="4021">QUEDAS DO IGUAÇU                        </option>
+		<option value="4030">QUERÊNCIA DO NORTE                      </option>
+		<option value="4034">QUINTA DO SOL                           </option>
+		<option value="4040">QUITANDINHA                             </option>
+		<option value="4053">RAMILÂNDIA                              </option>
+		<option value="4055">RANCHO ALEGRE                           </option>
+		<option value="4056">RANCHO ALEGRE D'OESTE                   </option>
+		<option value="4061">REALEZA                                 </option>
+		<option value="4062">REBOUÇAS                                </option>
+		<option value="4079">RENASCENÇA                              </option>
+		<option value="4083">RESERVA                                 </option>
+		<option value="4085">RESERVA DO IGUAÇU                       </option>
+		<option value="4121">RIBEIRÃO CLARO                          </option>
+		<option value="4125">RIBEIRÃO DO PINHAL                      </option>
+		<option value="4139">RIO AZUL                                </option>
+		<option value="4141">RIO BOM                                 </option>
+		<option value="4143">RIO BONITO DO IGUAÇU                    </option>
+		<option value="4146">RIO BRANCO DO IVAÍ                      </option>
+		<option value="4147">RIO BRANCO DO SUL                       </option>
+		<option value="4182">RIO NEGRO                               </option>
+		<option value="4214">ROLÂNDIA                                </option>
+		<option value="4219">RONCADOR                                </option>
+		<option value="4222">RONDON                                  </option>
+		<option value="4231">ROSÁRIO DO IVAÍ                         </option>
+		<option value="4246">SABÁUDIA                                </option>
+		<option value="4263">SALGADO FILHO                           </option>
+		<option value="4277">SALTO DO ITARARÉ                        </option>
+		<option value="4279">SALTO DO LONTRA                         </option>
+		<option value="4296">SANTA AMÉLIA                            </option>
+		<option value="4311">SANTA CECÍLIA DO PAVÃO                  </option>
+		<option value="4325">SANTA CRUZ DE MONTE CASTELO             </option>
+		<option value="4336">SANTA FÉ                                </option>
+		<option value="4348">SANTA HELENA                            </option>
+		<option value="4353">SANTA INÊS                              </option>
+		<option value="4357">SANTA ISABEL DO IVAÍ                    </option>
+		<option value="4360">SANTA IZABEL DO OESTE                   </option>
+		<option value="4363">SANTA LÚCIA                             </option>
+		<option value="4386">SANTA MARIA DO OESTE                    </option>
+		<option value="4392">SANTA MARIANA                           </option>
+		<option value="4394">SANTA MÔNICA                            </option>
+		<option value="4428">SANTA TEREZA DO OESTE                   </option>
+		<option value="4434">SANTA TEREZINHA DE ITAIPU               </option>
+		<option value="4455">SANTANA DO ITARARÉ                      </option>
+		<option value="4488">SANTO ANTÔNIO DA PLATINA                </option>
+		<option value="4498">SANTO ANTÔNIO DO CAIUÁ                  </option>
+		<option value="4508">SANTO ANTÔNIO DO PARAÍSO                </option>
+		<option value="4513">SANTO ANTÔNIO DO SUDOESTE               </option>
+		<option value="4523">SANTO INÁCIO                            </option>
+		<option value="4554">SÃO CARLOS DO IVAÍ                      </option>
+		<option value="4626">SÃO JERÔNIMO DA SERRA                   </option>
+		<option value="4628">SÃO JOÃO                                </option>
+		<option value="4654">SÃO JOÃO DO CAIUÁ                       </option>
+		<option value="4658">SÃO JOÃO DO IVAÍ                        </option>
+		<option value="4675">SÃO JOÃO DO TRIUNFO                     </option>
+		<option value="4684">SAO JORGE D'OESTE                       </option>
+		<option value="4685">SÃO JORGE DO IVAÍ                       </option>
+		<option value="4686">SÃO JORGE DO PATROCÍNIO                 </option>
+		<option value="4690">SÃO JOSÉ DA BOA VISTA                   </option>
+		<option value="4700">SÃO JOSÉ DAS PALMEIRAS                  </option>
+		<option value="4743">SÃO JOSÉ DOS PINHAIS                    </option>
+		<option value="4766">SÃO MANOEL DO PARANÁ                    </option>
+		<option value="4774">SÃO MATEUS DO SUL                       </option>
+		<option value="4790">SÃO MIGUEL DO IGUAÇU                    </option>
+		<option value="4811">SÃO PEDRO DO IGUAÇU                     </option>
+		<option value="4812">SÃO PEDRO DO IVAÍ                       </option>
+		<option value="4813">SÃO PEDRO DO PARANÁ                     </option>
+		<option value="4832">SÃO SEBASTIÃO DA AMOREIRA               </option>
+		<option value="4856">SÃO TOMÉ                                </option>
+		<option value="4873">SAPOPEMA                                </option>
+		<option value="4880">SARANDI                                 </option>
+		<option value="4889">SAUDADE DO IGUAÇU                       </option>
+		<option value="4922">SENGÉS                                  </option>
+		<option value="4961">SERRANÓPOLIS DO IGUAÇU                  </option>
+		<option value="4970">SERTANEJA                               </option>
+		<option value="4972">SERTANÓPOLIS                            </option>
+		<option value="5005">SIQUEIRA CAMPOS                         </option>
+		<option value="5041">SULINA                                  </option>
+		<option value="5076">TAMARANA                                </option>
+		<option value="5078">TAMBOARA                                </option>
+		<option value="5094">TAPEJARA                                </option>
+		<option value="5099">TAPIRA                                  </option>
+		<option value="5133">TEIXEIRA SOARES                         </option>
+		<option value="5138">TELÊMACO BORBA                          </option>
+		<option value="5157">TERRA BOA                               </option>
+		<option value="5162">TERRA RICA                              </option>
+		<option value="5163">TERRA ROXA                              </option>
+		<option value="5170">TIBAGI                                  </option>
+		<option value="5176">TIJUCAS DO SUL                          </option>
+		<option value="5194">TOLEDO                                  </option>
+		<option value="5197">TOMAZINA                                </option>
+		<option value="5221">TRÊS BARRAS DO PARANÁ                   </option>
+		<option value="5258">TUNAS DO PARANÁ                         </option>
+		<option value="5259">TUNEIRAS DO OESTE                       </option>
+		<option value="5269">TUPÃSSI                                 </option>
+		<option value="5283">TURVO                                   </option>
+		<option value="5300">UBIRATÃ                                 </option>
+		<option value="5315">UMUARAMA                                </option>
+		<option value="5320">UNIÃO DA VITÓRIA                        </option>
+		<option value="5326">UNIFLOR                                 </option>
+		<option value="5329">URAÍ                                    </option>
+		<option value="5403">VENTANIA                                </option>
+		<option value="5410">VERA CRUZ DO OESTE                      </option>
+		<option value="5415">VERÊ                                    </option>
+		<option value="5464">VIRMOND                                 </option>
+		<option value="5481">VITORINO                                </option>
+		<option value="5491">WENCESLAU BRAZ                          </option>
+		<option value="5496">XAMBRÊ                                  </option>
+
+	</select>
+                                <span id="ContentPlaceHolder1_RequiredFieldValidator_Municipio" style="color:Red;visibility:hidden;">Município deve ser informado</span>
+                            </td>
+</tr>
+
+                        <tr id="ContentPlaceHolder1_label_entidade">
+	<td colspan="3">
+                                <span id="ContentPlaceHolder1_lblEntidade">Entidade</span>
+                            </td>
+</tr>
+
+                        <tr id="ContentPlaceHolder1_combo_entidade">
+	<td colspan="3">
+                                <select name="ctl00$ContentPlaceHolder1$ddlEntidade" onchange="javascript:setTimeout('__doPostBack(\'ctl00$ContentPlaceHolder1$ddlEntidade\',\'\')', 0)" id="ContentPlaceHolder1_ddlEntidade" style="width: 500px; max-width: 500px">
+		<option value="">Selecione uma Entidade</option>
+		<option value="9705">CÂMARA MUNICIPAL DE ARAUCÁRIA</option>
+		<option value="14767">COMPANHIA ARAUCARIENSE DE TRANSPORTE URBANO                                                         </option>
+		<option value="9241">COMPANHIA DE DESENVOLVIMENTO DE ARAUCÁRIA  (EXTINTO)                                                                                                                                                                                                      </option>
+		<option value="198617">COMPANHIA MUNICIPAL DE HABITAÇÃO DE ARAUCÁRIA                                                       </option>
+		<option value="10791">COMPANHIA MUNICIPAL DE TRANSPORTE COLETIVO DE ARAUCARIA - CMTC/ARAUCARIA  (EXTINTO)                                                                                                                                                                       </option>
+		<option value="103254">FUNDO DE PREVIDENCIA MUNICIPAL DE ARAUCARIA                                                         </option>
+		<option value="14433">FUNDO MUNICIPAL DE HABITAÇÃO DE ARAUCÁRIA                                                           </option>
+		<option value="14331">FUNDO MUNICIPAL DE REEQUIPAMENTO DO CORPO BOMBEIROS DE ARAUCÁRIA                                                                                                                                                                                          </option>
+		<option value="14489">FUNDO MUNICIPAL DE SAÚDE DE ARAUCÁRIA                                                               </option>
+		<option selected="selected" value="12196">MUNICÍPIO DE ARAUCÁRIA                                                                              </option>
+		<option value="144676">SECRETARIA DE EDUCACAO DO MUNICIPIO DE ARAUCARIA                                                                                                                                                                                                          </option>
+		<option value="144713">SECRETARIA DE SAUDE DO MUNICIPIO DE ARAUCARIA                                                                                                                                                                                                             </option>
+
+	</select>
+                                <span id="ContentPlaceHolder1_RequiredFieldValidator_Entidade" style="color:Red;visibility:hidden;">Entidade deve ser informada</span>
+                            </td>
+</tr>
+
+                        <tr>
+                            <td colspan="3">
+                                <span id="ContentPlaceHolder1_lblRelatorio">Relatório</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <select name="ctl00$ContentPlaceHolder1$ddlRelatorio" onchange="javascript:setTimeout('__doPostBack(\'ctl00$ContentPlaceHolder1$ddlRelatorio\',\'\')', 0)" id="ContentPlaceHolder1_ddlRelatorio">
+	<option value="">Selecione um Relatório</option>
+	<option selected="selected" value="20">RGF - Demonstrativo da Despesa com Pessoal</option>
+	<option value="25">RGF - Demonstrativo da Disponibilidade de Caixa</option>
+	<option value="52">RGF - Demonstrativo da Disponibilidade de Caixa e dos Restos a Pagar</option>
+	<option value="22">RGF - Demonstrativo da Dívida Consolidada Líquida - DCL</option>
+	<option value="23">RGF - Demonstrativo das Garantias e Contragarantias de Valores</option>
+	<option value="24">RGF - Demonstrativo das Operações de Crédito</option>
+	<option value="31">RGF - Demonstrativo de Outras Despesas de Pessoal decorrente de Contratos de Terceirização (exceto elemento 34)</option>
+	<option value="26">RGF - Demonstrativo dos Restos a Pagar</option>
+	<option value="27">RGF - Demonstrativo Simplificado do Relatório de Gestão</option>
+	<option value="7">RREO - Balanço Orçamentário</option>
+	<option value="10">RREO - Demonstrativo da Receita Corrente Líquida</option>
+	<option value="17">RREO - Demonstrativo da Receita de Alienação de Ativos e Aplicação de Recursos</option>
+	<option value="18">RREO - Demonstrativo da Receita de Impostos Líquida e das Despesas Próprias com Ações e Serviços Públicos de Saúde</option>
+	<option value="16">RREO - Demonstrativo das Receitas de Operações de Crédito e Despesas de Capital</option>
+	<option value="15">RREO - Demonstrativo das Receitas e Despesas com a Manutenção e Desenvolvimento do Ensino - MDE</option>
+	<option value="12">RREO - Demonstrativo do Resultado Nominal</option>
+	<option value="13">RREO - Demonstrativo do Resultado Primário</option>
+	<option value="47">RREO - Demonstrativo dos Resultados Primário e Nominal</option>
+
+</select>
+                                <span id="ContentPlaceHolder1_RequiredFieldValidator2" style="color:Red;visibility:hidden;">Relatório deve ser Informado</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span id="ContentPlaceHolder1_lblAno">Ano</span>
+                            </td>
+                            <td colspan="2">
+                                <span id="ContentPlaceHolder1_lblPeriodo">Período</span>
+                            </td>
+                        </tr>
+                       
+                        <tr>
+                            <td>
+                                <select name="ctl00$ContentPlaceHolder1$ddlAno" onchange="javascript:setTimeout('__doPostBack(\'ctl00$ContentPlaceHolder1$ddlAno\',\'\')', 0)" id="ContentPlaceHolder1_ddlAno">
+	<option value="">Selecione um Ano</option>
+	<option value="2026">2026</option>
+	<option selected="selected" value="2025">2025</option>
+	<option value="2024">2024</option>
+	<option value="2023">2023</option>
+	<option value="2022">2022</option>
+	<option value="2021">2021</option>
+	<option value="2020">2020</option>
+	<option value="2019">2019</option>
+	<option value="2018">2018</option>
+	<option value="2017">2017</option>
+	<option value="2016">2016</option>
+	<option value="2015">2015</option>
+	<option value="2014">2014</option>
+	<option value="2013">2013</option>
+
+</select>
+                                <span id="ContentPlaceHolder1_RequiredFieldValidator1" style="color:Red;visibility:hidden;">Ano deve ser Informado</span>
+                            </td>
+                            <td>
+                                <select name="ctl00$ContentPlaceHolder1$ddlPeriodo" id="ContentPlaceHolder1_ddlPeriodo">
+	<option value="">Selecione um Período</option>
+	<option value="1">Janeiro</option>
+	<option value="2">Fevereiro</option>
+	<option value="3">Março</option>
+	<option value="4">Abril</option>
+	<option value="5">Maio</option>
+	<option value="6">Junho</option>
+	<option value="7">Julho</option>
+	<option value="8">Agosto</option>
+	<option value="9">Setembro</option>
+	<option value="10">Outubro</option>
+	<option value="11">Novembro</option>
+	<option value="12">Dezembro</option>
+
+</select>
+                            </td>
+                            <td align="right">
+                            </td>
+                        </tr>
+
+                        
+
+                        <tr>
+                            <td colspan="3">
+                                <br><br>
+                                
+                            </td>
+                        </tr>
+                    </tbody></table>
+                </div>
+
+            <script type="text/javascript" language="javascript">
+                function SetTarget() {
+                    document.forms[0].target = "_blank";
+                }
+            </script>
+            <div class="divExterno">
+            <a onclick="SetTarget();" id="ContentPlaceHolder1_btnConsulta" class="acaoPrimaria" href="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$ContentPlaceHolder1$btnConsulta&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, true))">Consultar</a>
+            </div>
+
+        
+</div>
+    </div>
+
+            </div>
+            
+<script type="text/javascript">
+//<![CDATA[
+var Page_Validators =  new Array(document.getElementById("ContentPlaceHolder1_RequiredFieldValidator_Tipo"), document.getElementById("ContentPlaceHolder1_RequiredFieldValidator2"), document.getElementById("ContentPlaceHolder1_RequiredFieldValidator1"));
+//]]>
+</script>
+
+<script type="text/javascript">
+//<![CDATA[
+var ContentPlaceHolder1_RequiredFieldValidator_Tipo = document.all ? document.all["ContentPlaceHolder1_RequiredFieldValidator_Tipo"] : document.getElementById("ContentPlaceHolder1_RequiredFieldValidator_Tipo");
+ContentPlaceHolder1_RequiredFieldValidator_Tipo.controltovalidate = "ContentPlaceHolder1_ddlTipo";
+ContentPlaceHolder1_RequiredFieldValidator_Tipo.errormessage = "Tipo deve ser informado";
+ContentPlaceHolder1_RequiredFieldValidator_Tipo.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+ContentPlaceHolder1_RequiredFieldValidator_Tipo.initialvalue = "";
+var ContentPlaceHolder1_RequiredFieldValidator2 = document.all ? document.all["ContentPlaceHolder1_RequiredFieldValidator2"] : document.getElementById("ContentPlaceHolder1_RequiredFieldValidator2");
+ContentPlaceHolder1_RequiredFieldValidator2.controltovalidate = "ContentPlaceHolder1_ddlRelatorio";
+ContentPlaceHolder1_RequiredFieldValidator2.errormessage = "Relatório deve ser Informado";
+ContentPlaceHolder1_RequiredFieldValidator2.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+ContentPlaceHolder1_RequiredFieldValidator2.initialvalue = "";
+var ContentPlaceHolder1_RequiredFieldValidator1 = document.all ? document.all["ContentPlaceHolder1_RequiredFieldValidator1"] : document.getElementById("ContentPlaceHolder1_RequiredFieldValidator1");
+ContentPlaceHolder1_RequiredFieldValidator1.controltovalidate = "ContentPlaceHolder1_ddlAno";
+ContentPlaceHolder1_RequiredFieldValidator1.errormessage = "Ano deve ser Informado";
+ContentPlaceHolder1_RequiredFieldValidator1.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+ContentPlaceHolder1_RequiredFieldValidator1.initialvalue = "";
+//]]>
+</script>
+
+
+<script type="text/javascript">
+//<![CDATA[
+
+var Page_ValidationActive = false;
+if (typeof(ValidatorOnLoad) == "function") {
+    ValidatorOnLoad();
+}
+
+function ValidatorOnSubmit() {
+    if (Page_ValidationActive) {
+        return ValidatorCommonOnSubmit();
+    }
+    else {
+        return true;
+    }
+}
+        Sys.Application.add_init(function() {
+    $create(Sys.UI._UpdateProgress, {"associatedUpdatePanelId":"ContentPlaceHolder1_upFiltros","displayAfter":500,"dynamicLayout":true}, null, null, $get("ContentPlaceHolder1_updateProgressFiltros"));
+});
+
+document.getElementById('ContentPlaceHolder1_RequiredFieldValidator_Tipo').dispose = function() {
+    Array.remove(Page_Validators, document.getElementById('ContentPlaceHolder1_RequiredFieldValidator_Tipo'));
+}
+
+document.getElementById('ContentPlaceHolder1_RequiredFieldValidator2').dispose = function() {
+    Array.remove(Page_Validators, document.getElementById('ContentPlaceHolder1_RequiredFieldValidator2'));
+}
+
+document.getElementById('ContentPlaceHolder1_RequiredFieldValidator1').dispose = function() {
+    Array.remove(Page_Validators, document.getElementById('ContentPlaceHolder1_RequiredFieldValidator1'));
+}
+//]]>
+</script>
+<span style="display: none !important;"><input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="ctl00$ContentPlaceHolder1$btnConsulta"></span><span style="display: none !important;"><input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value=""></span><span style="display: none !important;"><input type="hidden" name="__LASTFOCUS" id="__LASTFOCUS" value=""></span><span style="display: none !important;"><input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKLTcwNjY4MTE5Mw9kFgJmD2QWAgIHD2QWAgIDD2QWBAIBDw8WAh4EVGV4dAUlUmVsYXTDs3Jpb3MgZGEgTFJGIC0gYSBwYXJ0aXIgZGUgMjAxM2RkAgMPZBYEAgEPDxYCHwAF6wM8c3Ryb25nPkNvbmRpw6fDtWVzIHBhcmEgZW1pc3PDo28gZG8gcmVsYXTDs3Jpby48L3N0cm9uZz48YnI+T3MgUmVsYXTDs3Jpb3Mgc8OjbyBnZXJhZG9zIGR1cmFudGUgYSBub2l0ZSwgbmEgbWVzbWEgZGF0YSBkbyBmZWNoYW1lbnRvIGRhIHJlbWVzc2EgZG9zIGRhZG9zIGRhIGVudGlkYWRlIGp1bnRvIGFvIFRyaWJ1bmFsIGRlIENvbnRhcy48YnI+UmVsYXTDs3Jpb3MgY29uc29saWRhZG9zIGV4aWdlbSBxdWUgPHN0cm9uZz48c3BhbiBzdHlsZSA9ImNvbG9yOnJlZDsiPnRvZGFzIGFzIGVudGlkYWRlcyBkbyBtdW5pY8OtcGlvIG9icmlnYWRhcyBhIHByZXN0YXIgY29udGFzPC9zcGFuPjwvc3Ryb25nPiB0ZW5oYW0gZW5jYW1pbmhhZG8gZSB2YWxpZGFkbyBzZXVzIGRhZG9zLiBRdWFuZG8gZXN0YSBjb25kacOnw6NvIG7Do28gZm9yIGF0ZW5kaWRhIG8gc29saWNpdGFudGUgc2Vyw6EgaW5mb3JtYWRvIGUgbyByZWxhdMOzcmlvIG7Do28gc2Vyw6EgZ2VyYWRvLmRkAgUPZBYCZg9kFhICAw9kFgJmD2QWAgIBDxBkEBUDEFNlbGVjaW9uZSBvIFRpcG8KTXVuaWPDrXBpbxlDb25zw7NyY2lvIEludGVybXVuaWNpcGFsFQMAATEBMhQrAwNnZ2cWAQIBZAIFDxYCHgdWaXNpYmxlZ2QCBw8WAh8BZxYCZg9kFgQCAQ8QDxYGHg5EYXRhVmFsdWVGaWVsZAULaWRNdW5pY2lwaW8eDURhdGFUZXh0RmllbGQFC25tTXVuaWNpcGlvHgtfIURhdGFCb3VuZGcWAh4Fc3R5bGUFHndpZHRoOiA1MDBweDsgbWF4LXdpZHRoOiA1MDBweBAVkAMXU2VsZWNpb25lIHVtIE11bmljw61waW8pQUJBVEnDgSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICApQURSSUFOw5NQT0xJUyAgICAgICAgICAgICAgICAgICAgICAgICAgICAoQUdVRE9TIERPIFNVTCAgICAgICAgICAgICAgICAgICAgICAgICAgIClBTE1JUkFOVEUgVEFNQU5EQVLDiSAgICAgICAgICAgICAgICAgICAgIClBTFRBTUlSQSBETyBQQVJBTsOBICAgICAgICAgICAgICAgICAgICAgIClBTFRPIFBBUkHDjVNPICAgICAgICAgICAgICAgICAgICAgICAgICAgIClBTFRPIFBBUkFOw4EgICAgICAgICAgICAgICAgICAgICAgICAgICAgIChBTFRPIFBJUVVJUkkgICAgICAgICAgICAgICAgICAgICAgICAgICAgKUFMVMOUTklBICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKEFMVk9SQURBIERPIFNVTCAgICAgICAgICAgICAgICAgICAgICAgICApQU1BUE9Sw4MgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICApQU1Qw4lSRSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAoQU5BSFkgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIClBTkRJUsOBICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICnDgk5HVUxPICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIChBTlRPTklOQSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKUFOVMOUTklPIE9MSU5UTyAgICAgICAgICAgICAgICAgICAgICAgICAgKEFQVUNBUkFOQSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAoQVJBUE9OR0FTICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIChBUkFQT1RJICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKUFSQVBVw4MgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKEFSQVJVTkEgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICApQVJBVUPDgVJJQSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICApQVJJUkFOSEEgRE8gSVZBw40gICAgICAgICAgICAgICAgICAgICAgICApQVNTQcONICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAoQVNTSVMgQ0hBVEVBVUJSSUFORCAgICAgICAgICAgICAgICAgICAgIChBU1RPUkdBICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKEFUQUxBSUEgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAoQkFMU0EgTk9WQSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIChCQU5ERUlSQU5URVMgICAgICAgICAgICAgICAgICAgICAgICAgICAgKEJBUkJPU0EgRkVSUkFaICAgICAgICAgICAgICAgICAgICAgICAgICApQkFSUkEgRE8gSkFDQVLDiSAgICAgICAgICAgICAgICAgICAgICAgICApQkFSUkFDw4NPICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAoQkVMQSBWSVNUQSBEQSBDQVJPQkEgICAgICAgICAgICAgICAgICAgIClCRUxBIFZJU1RBIERPIFBBUkHDjVNPICAgICAgICAgICAgICAgICAgIChCSVRVUlVOQSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKUJPQSBFU1BFUkFOw4dBICAgICAgICAgICAgICAgICAgICAgICAgICAgKkJPQSBFU1BFUkFOw4dBIERPIElHVUHDh1UgICAgICAgICAgICAgICAgIClCT0EgVkVOVFVSQSBERSBTw4NPIFJPUVVFICAgICAgICAgICAgICAgIChCT0EgVklTVEEgREEgQVBBUkVDSURBICAgICAgICAgICAgICAgICAgKUJPQ0FJw5pWQSBETyBTVUwgICAgICAgICAgICAgICAgICAgICAgICAgKEJPTSBKRVNVUyBETyBTVUwgICAgICAgICAgICAgICAgICAgICAgICAoQk9NIFNVQ0VTU08gICAgICAgICAgICAgICAgICAgICAgICAgICAgIChCT00gU1VDRVNTTyBETyBTVUwgICAgICAgICAgICAgICAgICAgICAgKUJPUlJBWsOTUE9MSVMgICAgICAgICAgICAgICAgICAgICAgICAgICAgKEJSQUdBTkVZICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICApQlJBU0lMw4JORElBIERPIFNVTCAgICAgICAgICAgICAgICAgICAgICAoQ0FGRUFSQSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIClDQUZFTMOCTkRJQSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIChDQUZFWkFMIERPIFNVTCAgICAgICAgICAgICAgICAgICAgICAgICAgKUNBTElGw5NSTklBICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKUNBTUJBUsOBICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKUNBTULDiSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKENBTUJJUkEgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAoQ0FNUElOQSBEQSBMQUdPQSAgICAgICAgICAgICAgICAgICAgICAgIClDQU1QSU5BIERPIFNJTcODTyAgICAgICAgICAgICAgICAgICAgICAgIChDQU1QSU5BIEdSQU5ERSBETyBTVUwgICAgICAgICAgICAgICAgICAgKENBTVBPIEJPTklUTyAgICAgICAgICAgICAgICAgICAgICAgICAgICAoQ0FNUE8gRE8gVEVORU5URSAgICAgICAgICAgICAgICAgICAgICAgIChDQU1QTyBMQVJHTyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKENBTVBPIE1BR1JPICAgICAgICAgICAgICAgICAgICAgICAgICAgICApQ0FNUE8gTU9VUsODTyAgICAgICAgICAgICAgICAgICAgICAgICAgICApQ8OCTkRJRE8gREUgQUJSRVUgICAgICAgICAgICAgICAgICAgICAgICApQ0FORMOTSSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAoQ0FOVEFHQUxPICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIChDQVBBTkVNQSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKkNBUElUw4NPIExFw5ROSURBUyBNQVJRVUVTICAgICAgICAgICAgICAgIClDQVJBTUJFw40gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIClDQVJMw5NQT0xJUyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIChDQVNDQVZFTCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKENBU1RSTyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAoQ0FUQU5EVVZBUyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIClDRU5URU7DgVJJTyBETyBTVUwgICAgICAgICAgICAgICAgICAgICAgIChDRVJSTyBBWlVMICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKUPDiVUgQVpVTCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKENIT1BJTlpJTkhPICAgICAgICAgICAgICAgICAgICAgICAgICAgICAoQ0lBTk9SVEUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIClDSURBREUgR0HDmkNIQSAgICAgICAgICAgICAgICAgICAgICAgICAgIClDTEVWRUzDgk5ESUEgICAgICAgICAgICAgICAgICAgICAgICAgICAgIChDT0xPTUJPICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKENPTE9SQURPICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAoQ09OR09OSElOSEFTICAgICAgICAgICAgICAgICAgICAgICAgICAgIChDT05TRUxIRUlSTyBNQUlSSU5DSyAgICAgICAgICAgICAgICAgICAgKENPTlRFTkRBICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICApQ09SQsOJTElBICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAqQ09STsOJTElPIFBST0PDk1BJTyAgICAgICAgICAgICAgICAgICAgICAgKENPUk9ORUwgRE9NSU5HT1MgU09BUkVTICAgICAgICAgICAgICAgICAoQ09ST05FTCBWSVZJREEgICAgICAgICAgICAgICAgICAgICAgICAgIClDT1JVTUJBVEHDjSBETyBTVUwgICAgICAgICAgICAgICAgICAgICAgIChDUlVaIE1BQ0hBRE8gICAgICAgICAgICAgICAgICAgICAgICAgICAgKUNSVVpFSVJPIERPIElHVUHDh1UgICAgICAgICAgICAgICAgICAgICAgKENSVVpFSVJPIERPIE9FU1RFICAgICAgICAgICAgICAgICAgICAgICAoQ1JVWkVJUk8gRE8gU1VMICAgICAgICAgICAgICAgICAgICAgICAgIChDUlVaTUFMVElOQSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKENVUklUSUJBICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICApQ1VSScOaVkEgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAoRElBTUFOVEUgRE8gTk9SVEUgICAgICAgICAgICAgICAgICAgICAgIChESUFNQU5URSBEJ09FU1RFICAgICAgICAgICAgICAgICAgICAgICAgKERJQU1BTlRFIERPIFNVTCAgICAgICAgICAgICAgICAgICAgICAgICAoRE9JUyBWSVpJTkhPUyAgICAgICAgICAgICAgICAgICAgICAgICAgIChET1VSQURJTkEgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKERPVVRPUiBDQU1BUkdPICAgICAgICAgICAgICAgICAgICAgICAgICAoRE9VVE9SIFVMWVNTRVMgICAgICAgICAgICAgICAgICAgICAgICAgIClFTsOJQVMgTUFSUVVFUyAgICAgICAgICAgICAgICAgICAgICAgICAgIClFTkdFTkhFSVJPIEJFTFRSw4NPICAgICAgICAgICAgICAgICAgICAgIChFTlRSRSBSSU9TIERPIE9FU1RFICAgICAgICAgICAgICAgICAgICAgKUVTUEVSQU7Dh0EgTk9WQSAgICAgICAgICAgICAgICAgICAgICAgICAgKkVTUElHw4NPIEFMVE8gRE8gSUdVQcOHVSAgICAgICAgICAgICAgICAgIChGQVJPTCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKEZBWElOQUwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAoRkFaRU5EQSBSSU8gR1JBTkRFICAgICAgICAgICAgICAgICAgICAgIClGw4pOSVggICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIChGRVJOQU5ERVMgUElOSEVJUk8gICAgICAgICAgICAgICAgICAgICAgKEZJR1VFSVJBICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAoRkxPUiBEQSBTRVJSQSBETyBTVUwgICAgICAgICAgICAgICAgICAgIClGTE9SQcONICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIChGTE9SRVNUQSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKUZMT1JFU1TDk1BPTElTICAgICAgICAgICAgICAgICAgICAgICAgICAgKUZMw5NSSURBICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKEZPUk1PU0EgRE8gT0VTVEUgICAgICAgICAgICAgICAgICAgICAgICApRk9aIERPIElHVUHDh1UgICAgICAgICAgICAgICAgICAgICAgICAgICApRk9aIERPIEpPUkTDg08gICAgICAgICAgICAgICAgICAgICAgICAgICAoRlJBTkNJU0NPIEFMVkVTICAgICAgICAgICAgICAgICAgICAgICAgIClGUkFOQ0lTQ08gQkVMVFLDg08gICAgICAgICAgICAgICAgICAgICAgIChHRU5FUkFMIENBUk5FSVJPICAgICAgICAgICAgICAgICAgICAgICAgKEdPRE9ZIE1PUkVJUkEgICAgICAgICAgICAgICAgICAgICAgICAgICAoR09JT0VSRSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIChHT0lPWElNICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKEdSQU5ERVMgUklPUyAgICAgICAgICAgICAgICAgICAgICAgICAgICApR1VBw41SQSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAqR1VBSVJBw4fDgSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKEdVQU1JUkFOR0EgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAoR1VBUElSQU1BICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIChHVUFQT1JFTUEgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKEdVQVJBQ0kgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICApR1VBUkFOSUHDh1UgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAoR1VBUkFQVUFWQSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIClHVUFSQVFVRcOHQUJBICAgICAgICAgICAgICAgICAgICAgICAgICAgIChHVUFSQVRVQkEgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKUhPTsOTUklPIFNFUlBBICAgICAgICAgICAgICAgICAgICAgICAgICAgKElCQUlUSSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAoSUJFTUEgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIClJQklQT1LDgyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIClJQ0FSQcONTUEgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIClJR1VBUkHDh1UgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIChJR1VBVFUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKUlNQkHDmiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKElNQklUVVZBICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICApSU7DgUNJTyBNQVJUSU5TICAgICAgICAgICAgICAgICAgICAgICAgICApSU5BSsOBICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICApSU5ESUFOw5NQT0xJUyAgICAgICAgICAgICAgICAgICAgICAgICAgICAoSVBJUkFOR0EgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIClJUE9Sw4MgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIChJUkFDRU1BIERPIE9FU1RFICAgICAgICAgICAgICAgICAgICAgICAgKElSQVRJICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAoSVJFVEFNQSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIClJVEFHVUFKw4kgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIClJVEFJUFVMw4JORElBICAgICAgICAgICAgICAgICAgICAgICAgICAgIClJVEFNQkFSQUPDgSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIClJVEFNQsOJICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIChJVEFQRUpBUkEgRCdPRVNURSAgICAgICAgICAgICAgICAgICAgICAgKUlUQVBFUlXDh1UgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKUlUQcOaTkEgRE8gU1VMICAgICAgICAgICAgICAgICAgICAgICAgICAgKUlWQcONICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKUlWQUlQT1LDgyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKUlWQVTDiSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKElWQVRVQkEgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAoSkFCT1RJICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIChKQUNBUkVaSU5ITyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKUpBR1VBUElUw4MgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKUpBR1VBUklBw41WQSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKEpBTkRBSUEgRE8gU1VMICAgICAgICAgICAgICAgICAgICAgICAgICApSkFOScOTUE9MSVMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAoSkFQSVJBICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIClKQVBVUsOBICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIChKQVJESU0gQUxFR1JFICAgICAgICAgICAgICAgICAgICAgICAgICAgKEpBUkRJTSBPTElOREEgICAgICAgICAgICAgICAgICAgICAgICAgICAoSkFUQUlaSU5ITyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIClKRVNVw41UQVMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIClKT0FRVUlNIFTDgVZPUkEgICAgICAgICAgICAgICAgICAgICAgICAgIClKVU5ESUHDjSBETyBTVUwgICAgICAgICAgICAgICAgICAgICAgICAgIChKVVJBTkRBICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKEpVU1NBUkEgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICApS0FMT1LDiSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAoTEFQQSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIChMQVJBTkpBTCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKExBUkFOSkVJUkFTIERPIFNVTCAgICAgICAgICAgICAgICAgICAgICApTEXDk1BPTElTICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICApTElESUFOw5NQT0xJUyAgICAgICAgICAgICAgICAgICAgICAgICAgICAoTElORE9FU1RFICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIChMT0FOREEgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKExPQkFUTyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAoTE9ORFJJTkEgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIChMVUlaSUFOQSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKExVTkFSREVMTEkgICAgICAgICAgICAgICAgICAgICAgICAgICAgICApTFVQSU9Ow5NQT0xJUyAgICAgICAgICAgICAgICAgICAgICAgICAgICAoTUFMTEVUICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIClNQU1CT1LDiiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIClNQU5EQUdVQcOHVSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIChNQU5EQUdVQVJJICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKE1BTkRJUklUVUJBICAgICAgICAgICAgICAgICAgICAgICAgICAgICApTUFORlJJTsOTUE9MSVMgICAgICAgICAgICAgICAgICAgICAgICAgICAoTUFOR1VFSVJJTkhBICAgICAgICAgICAgICAgICAgICAgICAgICAgIChNQU5PRUwgUklCQVMgICAgICAgICAgICAgICAgICAgICAgICAgICAgKU1BUkVDSEFMIEPDgk5ESURPIFJPTkRPTiAgICAgICAgICAgICAgICAgKE1BUklBIEhFTEVOQSAgICAgICAgICAgICAgICAgICAgICAgICAgICAoTUFSSUFMVkEgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIClNQVJJTMOCTkRJQSBETyBTVUwgICAgICAgICAgICAgICAgICAgICAgIChNQVJJTEVOQSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKE1BUklMVVogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICApTUFSSU5Hw4EgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICApTUFSScOTUE9MSVMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICApTUFSSVDDgSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAoTUFSTUVMRUlSTyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIChNQVJRVUlOSE8gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKE1BUlVNQkkgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICApTUFURUzDgk5ESUEgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAoTUFUSU5IT1MgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIChNQVRPIFJJQ08gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKU1BVcOBIERBIFNFUlJBICAgICAgICAgICAgICAgICAgICAgICAgICAgKE1FRElBTkVJUkEgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAoTUVSQ0VERVMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIChNSVJBRE9SICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKE1JUkFTRUxWQSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAoTUlTU0FMICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIChNT1JFSVJBIFNBTEVTICAgICAgICAgICAgICAgICAgICAgICAgICAgKE1PUlJFVEVTICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAoTVVOSE9aIERFIE1FTExPICAgICAgICAgICAgICAgICAgICAgICAgIClOT1NTQSBTRU5IT1JBIERBUyBHUkHDh0FTICAgICAgICAgICAgICAgICpOT1ZBIEFMSUFOw4dBIERPIElWQcONICAgICAgICAgICAgICAgICAgICApTk9WQSBBTcOJUklDQSBEQSBDT0xJTkEgICAgICAgICAgICAgICAgICAoTk9WQSBBVVJPUkEgICAgICAgICAgICAgICAgICAgICAgICAgICAgIChOT1ZBIENBTlRVICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKU5PVkEgRVNQRVJBTsOHQSAgICAgICAgICAgICAgICAgICAgICAgICAgKU5PVkEgRVNQRVJBTsOHQSBETyBTVURPRVNURSAgICAgICAgICAgICAgKU5PVkEgRsOBVElNQSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKE5PVkEgTEFSQU5KRUlSQVMgICAgICAgICAgICAgICAgICAgICAgICAoTk9WQSBMT05EUklOQSAgICAgICAgICAgICAgICAgICAgICAgICAgIClOT1ZBIE9Mw41NUElBICAgICAgICAgICAgICAgICAgICAgICAgICAgIClOT1ZBIFBSQVRBIERPIElHVUHDh1UgICAgICAgICAgICAgICAgICAgIClOT1ZBIFNBTlRBIELDgVJCQVJBICAgICAgICAgICAgICAgICAgICAgIChOT1ZBIFNBTlRBIFJPU0EgICAgICAgICAgICAgICAgICAgICAgICAgKE5PVkEgVEVCQVMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAoTk9WTyBJVEFDT0xPTUkgICAgICAgICAgICAgICAgICAgICAgICAgIChPUlRJR1VFSVJBICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKE9VUklaT05BICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAoT1VSTyBWRVJERSBETyBPRVNURSAgICAgICAgICAgICAgICAgICAgIClQQUnDh0FORFUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIChQQUxNQVMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKFBBTE1FSVJBICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAoUEFMTUlUQUwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIChQQUxPVElOQSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKVBBUkHDjVNPIERPIE5PUlRFICAgICAgICAgICAgICAgICAgICAgICAgKFBBUkFOQUNJVFkgICAgICAgICAgICAgICAgICAgICAgICAgICAgICApUEFSQU5BR1XDgSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAoUEFSQU5BUE9FTUEgICAgICAgICAgICAgICAgICAgICAgICAgICAgIClQQVJBTkFWQcONICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIChQQVRPIEJSQUdBRE8gICAgICAgICAgICAgICAgICAgICAgICAgICAgKFBBVE8gQlJBTkNPICAgICAgICAgICAgICAgICAgICAgICAgICAgICAoUEFVTEEgRlJFSVRBUyAgICAgICAgICAgICAgICAgICAgICAgICAgIChQQVVMTyBGUk9OVElOICAgICAgICAgICAgICAgICAgICAgICAgICAgKFBFQUJJUlUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAoUEVST0JBTCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIClQw4lST0xBICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIChQRVJPTEEgRCdPRVNURSAgICAgICAgICAgICAgICAgICAgICAgICAgKVBJw4pOICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKFBJTkhBSVMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICApUElOSEFMIERFIFPDg08gQkVOVE8gICAgICAgICAgICAgICAgICAgICApUElOSEFMw4NPICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICApUElOSMODTyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICApUElSQcONIERPIFNVTCAgICAgICAgICAgICAgICAgICAgICAgICAgICAoUElSQVFVQVJBICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIChQSVRBTkdBICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKFBJVEFOR1VFSVJBUyAgICAgICAgICAgICAgICAgICAgICAgICAgICApUExBTkFMVElOQSBETyBQQVJBTsOBICAgICAgICAgICAgICAgICAgICAoUExBTkFMVE8gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIChQT05UQSBHUk9TU0EgICAgICAgICAgICAgICAgICAgICAgICAgICAgKVBPTlRBTCBETyBQQVJBTsOBICAgICAgICAgICAgICAgICAgICAgICAgKFBPUkVDQVRVICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAoUE9SVE8gQU1BWk9OQVMgICAgICAgICAgICAgICAgICAgICAgICAgIChQT1JUTyBCQVJSRUlSTyAgICAgICAgICAgICAgICAgICAgICAgICAgKFBPUlRPIFJJQ08gICAgICAgICAgICAgICAgICAgICAgICAgICAgICApUE9SVE8gVklUw5NSSUEgICAgICAgICAgICAgICAgICAgICAgICAgICAoUFJBRE8gRkVSUkVJUkEgICAgICAgICAgICAgICAgICAgICAgICAgIChQUkFOQ0hJVEEgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKFBSRVNJREVOVEUgQ0FTVEVMTyBCUkFOQ08gICAgICAgICAgICAgICAoUFJJTUVJUk8gREUgTUFJTyAgICAgICAgICAgICAgICAgICAgICAgIClQUlVERU5Uw5NQT0xJUyAgICAgICAgICAgICAgICAgICAgICAgICAgIClRVUFSVE8gQ0VOVEVOw4FSSU8gICAgICAgICAgICAgICAgICAgICAgIClRVUFUSUdVw4EgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIChRVUFUUk8gQkFSUkFTICAgICAgICAgICAgICAgICAgICAgICAgICAgKFFVQVRSTyBQT05URVMgICAgICAgICAgICAgICAgICAgICAgICAgICApUVVFREFTIERPIElHVUHDh1UgICAgICAgICAgICAgICAgICAgICAgICApUVVFUsOKTkNJQSBETyBOT1JURSAgICAgICAgICAgICAgICAgICAgICAoUVVJTlRBIERPIFNPTCAgICAgICAgICAgICAgICAgICAgICAgICAgIChRVUlUQU5ESU5IQSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKVJBTUlMw4JORElBICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKFJBTkNITyBBTEVHUkUgICAgICAgICAgICAgICAgICAgICAgICAgICAoUkFOQ0hPIEFMRUdSRSBEJ09FU1RFICAgICAgICAgICAgICAgICAgIChSRUFMRVpBICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKVJFQk9Vw4dBUyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKVJFTkFTQ0VOw4dBICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKFJFU0VSVkEgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICApUkVTRVJWQSBETyBJR1VBw4dVICAgICAgICAgICAgICAgICAgICAgICApUklCRUlSw4NPIENMQVJPICAgICAgICAgICAgICAgICAgICAgICAgICApUklCRUlSw4NPIERPIFBJTkhBTCAgICAgICAgICAgICAgICAgICAgICAoUklPIEFaVUwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIChSSU8gQk9NICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKVJJTyBCT05JVE8gRE8gSUdVQcOHVSAgICAgICAgICAgICAgICAgICAgKVJJTyBCUkFOQ08gRE8gSVZBw40gICAgICAgICAgICAgICAgICAgICAgKFJJTyBCUkFOQ08gRE8gU1VMICAgICAgICAgICAgICAgICAgICAgICAoUklPIE5FR1JPICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIClST0zDgk5ESUEgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIChST05DQURPUiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKFJPTkRPTiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAqUk9Tw4FSSU8gRE8gSVZBw40gICAgICAgICAgICAgICAgICAgICAgICAgKVNBQsOBVURJQSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKFNBTEdBRE8gRklMSE8gICAgICAgICAgICAgICAgICAgICAgICAgICApU0FMVE8gRE8gSVRBUkFSw4kgICAgICAgICAgICAgICAgICAgICAgICAoU0FMVE8gRE8gTE9OVFJBICAgICAgICAgICAgICAgICAgICAgICAgIClTQU5UQSBBTcOJTElBICAgICAgICAgICAgICAgICAgICAgICAgICAgICpTQU5UQSBDRUPDjUxJQSBETyBQQVbDg08gICAgICAgICAgICAgICAgICAoU0FOVEEgQ1JVWiBERSBNT05URSBDQVNURUxPICAgICAgICAgICAgIClTQU5UQSBGw4kgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIChTQU5UQSBIRUxFTkEgICAgICAgICAgICAgICAgICAgICAgICAgICAgKVNBTlRBIElOw4pTICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKVNBTlRBIElTQUJFTCBETyBJVkHDjSAgICAgICAgICAgICAgICAgICAgKFNBTlRBIElaQUJFTCBETyBPRVNURSAgICAgICAgICAgICAgICAgICApU0FOVEEgTMOaQ0lBICAgICAgICAgICAgICAgICAgICAgICAgICAgICAoU0FOVEEgTUFSSUEgRE8gT0VTVEUgICAgICAgICAgICAgICAgICAgIChTQU5UQSBNQVJJQU5BICAgICAgICAgICAgICAgICAgICAgICAgICAgKVNBTlRBIE3DlE5JQ0EgICAgICAgICAgICAgICAgICAgICAgICAgICAgKFNBTlRBIFRFUkVaQSBETyBPRVNURSAgICAgICAgICAgICAgICAgICAoU0FOVEEgVEVSRVpJTkhBIERFIElUQUlQVSAgICAgICAgICAgICAgIClTQU5UQU5BIERPIElUQVJBUsOJICAgICAgICAgICAgICAgICAgICAgIClTQU5UTyBBTlTDlE5JTyBEQSBQTEFUSU5BICAgICAgICAgICAgICAgICpTQU5UTyBBTlTDlE5JTyBETyBDQUlVw4EgICAgICAgICAgICAgICAgICAqU0FOVE8gQU5Uw5ROSU8gRE8gUEFSQcONU08gICAgICAgICAgICAgICAgKVNBTlRPIEFOVMOUTklPIERPIFNVRE9FU1RFICAgICAgICAgICAgICAgKVNBTlRPIElOw4FDSU8gICAgICAgICAgICAgICAgICAgICAgICAgICAgKlPDg08gQ0FSTE9TIERPIElWQcONICAgICAgICAgICAgICAgICAgICAgICpTw4NPIEpFUsOUTklNTyBEQSBTRVJSQSAgICAgICAgICAgICAgICAgICAqU8ODTyBKT8ODTyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgK1PDg08gSk/Dg08gRE8gQ0FJVcOBICAgICAgICAgICAgICAgICAgICAgICArU8ODTyBKT8ODTyBETyBJVkHDjSAgICAgICAgICAgICAgICAgICAgICAgICpTw4NPIEpPw4NPIERPIFRSSVVORk8gICAgICAgICAgICAgICAgICAgICAoU0FPIEpPUkdFIEQnT0VTVEUgICAgICAgICAgICAgICAgICAgICAgICpTw4NPIEpPUkdFIERPIElWQcONICAgICAgICAgICAgICAgICAgICAgICAqU8ODTyBKT1JHRSBETyBQQVRST0PDjU5JTyAgICAgICAgICAgICAgICAgKlPDg08gSk9Tw4kgREEgQk9BIFZJU1RBICAgICAgICAgICAgICAgICAgICpTw4NPIEpPU8OJIERBUyBQQUxNRUlSQVMgICAgICAgICAgICAgICAgICAqU8ODTyBKT1PDiSBET1MgUElOSEFJUyAgICAgICAgICAgICAgICAgICAgKlPDg08gTUFOT0VMIERPIFBBUkFOw4EgICAgICAgICAgICAgICAgICAgIClTw4NPIE1BVEVVUyBETyBTVUwgICAgICAgICAgICAgICAgICAgICAgICpTw4NPIE1JR1VFTCBETyBJR1VBw4dVICAgICAgICAgICAgICAgICAgICAqU8ODTyBQRURSTyBETyBJR1VBw4dVICAgICAgICAgICAgICAgICAgICAgKlPDg08gUEVEUk8gRE8gSVZBw40gICAgICAgICAgICAgICAgICAgICAgICpTw4NPIFBFRFJPIERPIFBBUkFOw4EgICAgICAgICAgICAgICAgICAgICAqU8ODTyBTRUJBU1RJw4NPIERBIEFNT1JFSVJBICAgICAgICAgICAgICAgKlPDg08gVE9Nw4kgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIChTQVBPUEVNQSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKFNBUkFOREkgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICApU0FVREFERSBETyBJR1VBw4dVICAgICAgICAgICAgICAgICAgICAgICApU0VOR8OJUyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAqU0VSUkFOw5NQT0xJUyBETyBJR1VBw4dVICAgICAgICAgICAgICAgICAgKFNFUlRBTkVKQSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICApU0VSVEFOw5NQT0xJUyAgICAgICAgICAgICAgICAgICAgICAgICAgICAoU0lRVUVJUkEgQ0FNUE9TICAgICAgICAgICAgICAgICAgICAgICAgIChTVUxJTkEgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKFRBTUFSQU5BICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAoVEFNQk9BUkEgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIChUQVBFSkFSQSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKFRBUElSQSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAoVEVJWEVJUkEgU09BUkVTICAgICAgICAgICAgICAgICAgICAgICAgIClURUzDik1BQ08gQk9SQkEgICAgICAgICAgICAgICAgICAgICAgICAgIChURVJSQSBCT0EgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKFRFUlJBIFJJQ0EgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAoVEVSUkEgUk9YQSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIChUSUJBR0kgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKFRJSlVDQVMgRE8gU1VMICAgICAgICAgICAgICAgICAgICAgICAgICAoVE9MRURPICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIChUT01BWklOQSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKlRSw4pTIEJBUlJBUyBETyBQQVJBTsOBICAgICAgICAgICAgICAgICAgIClUVU5BUyBETyBQQVJBTsOBICAgICAgICAgICAgICAgICAgICAgICAgIChUVU5FSVJBUyBETyBPRVNURSAgICAgICAgICAgICAgICAgICAgICAgKVRVUMODU1NJICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKFRVUlZPICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICApVUJJUkFUw4MgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAoVU1VQVJBTUEgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICpVTknDg08gREEgVklUw5NSSUEgICAgICAgICAgICAgICAgICAgICAgICAoVU5JRkxPUiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIClVUkHDjSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIChWRU5UQU5JQSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKFZFUkEgQ1JVWiBETyBPRVNURSAgICAgICAgICAgICAgICAgICAgICApVkVSw4ogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAoVklSTU9ORCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIChWSVRPUklOTyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKFdFTkNFU0xBVSBCUkFaICAgICAgICAgICAgICAgICAgICAgICAgICApWEFNQlLDiiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAVkAMAATkCMzMCNzcDMTI0AzEzNAMxNTcDMTU5AzE2MQMxNjYDMTgyAzE4NwMyMDgDMjExAzIyNgMyNDMDMjU0AzI2NAMyODQDMzMyAzMzNAMzMzUDMzUwAzM1NgMzODIDNDA0AzQwOAM0MTMDNDE1AzQ2OAM0NzkDNDk2AzUxOQM1MzQDNTY3AzU3MQM2MjUDNjI5AzYzMAM2MzUDNjM5AzY1MwM2ODIDNjk0AzY5NwM3MjQDNzM2Azc0MgM4NjUDODY2Azg2OAM5MDIDOTE1AzkxNwM5MTgDOTMzAzkzNgM5MzgDOTU1Azk1OAM5NjUDOTY4Azk3MAQxMDA4BDEwMTUEMTAzMAQxMDM3BDEwNjMEMTA3OQQxMTA5BDExNDgEMTE2NAQxMTcwBDEyMDQEMTIxNgQxMjI0BDEyNTAEMTI1NwQxMjU5BDEyNzEEMTI5NwQxMzAyBDEzNDgEMTM1MQQxMzU2BDEzNjMEMTM3NQQxMzgyBDEzOTQEMTQxMAQxNDU5BDE0NjMEMTQ2NAQxNDY3BDE0NzAEMTQ5MAQxNDkyBDE1MzQEMTUzNQQxNTM2BDE1NjkEMTYwMAQxNjA0BDE2MDkEMTY0NAQxNjQ1BDE2NTUEMTY3NwQxNjgxBDE3MjQEMTczMQQxNzM2BDE3NTIEMTc1MwQxNzY2BDE3NzQEMTc3NwQxNzg1BDE3OTAEMTc5NAQxODAzBDE4MTkEMTgyMAQxODI0BDE4MjcEMTg3OQQxODk4BDE5MTMEMTkxNAQxOTM5BDE5NTgEMTk2MAQxOTY2BDE5NzMEMTk3NgQxOTgwBDE5OTUEMTk5OQQyMDAwBDIwMDYEMjA0MgQyMDU4BDIwNjQEMjA4MQQyMTA4BDIxMzYEMjE0MAQyMTU0BDIxNTgEMjE2MgQyMTY1BDIxNzMEMjIxMQQyMjE4BDIyMzMEMjI0NwQyMjUwBDIyODUEMjI5NwQyMzE2BDIzMTgEMjM0MAQyMzQzBDI0MDAEMjQyNgQyNDI3BDI0MjgEMjQyOQQyNDM4BDI0NDgEMjQ2MQQyNDY5BDI0ODQEMjQ5MAQyNDk4BDI1MDMEMjUxMgQyNTE3BDI1MjQEMjU0OQQyNTc0BDI2MTEEMjYxOQQyNjMwBDI2MzcEMjcwNgQyNzA5BDI3MTQEMjczNQQyNzM5BDI3NDgEMjc1OAQyNzU5BDI3NjEEMjc4MQQyNzg0BDI3ODYEMjg0MQQyODQ1BDI4NTQEMjg1NQQyODU2BDI4NTgEMjg2MQQyODY2BDI5MTAEMjkxNwQyOTE4BDI5MjgEMjkyOQQyOTMxBDI5MzIEMjkzNQQyOTM2BDI5NDEEMjk0NAQyOTUxBDI5NjYEMjk3NgQyOTgxBDI5OTMEMzAwMwQzMDExBDMwNDUEMzA1OQQzMDY2BDMxMzgEMzE0MgQzMTgyBDMyNDUEMzI1MgQzMjU2BDMyNjAEMzI3MwQzMjgwBDMyODIEMzI4NQQzMzA0BDMzMDYEMzMxNgQzMzI5BDMzMzcEMzMzOQQzMzQyBDMzNjkEMzQyNgQzNDM3BDM0NTAEMzQ3MAQzNDg5BDM0OTMEMzUwNwQzNTEyBDM1MzcEMzU0NgQzNTQ3BDM1NTIEMzU1NgQzNjAyBDM2MDMEMzYxOQQzNjMwBDM2MzgEMzcwNwQzNzA4BDM3MDkEMzczNQQzNzU3BDM3NTkEMzc2MQQzNzY1BDM3ODYEMzgwMwQzODE3BDM4MTgEMzgyOAQzODMxBDM4NjMEMzg2NwQzODkwBDM5MDQEMzkwNQQzOTI2BDM5MzIEMzk1MAQzOTU3BDM5NjgEMzk5NgQ0MDA1BDQwMTMENDAxNQQ0MDE4BDQwMTkENDAyMQQ0MDMwBDQwMzQENDA0MAQ0MDUzBDQwNTUENDA1NgQ0MDYxBDQwNjIENDA3OQQ0MDgzBDQwODUENDEyMQQ0MTI1BDQxMzkENDE0MQQ0MTQzBDQxNDYENDE0NwQ0MTgyBDQyMTQENDIxOQQ0MjIyBDQyMzEENDI0NgQ0MjYzBDQyNzcENDI3OQQ0Mjk2BDQzMTEENDMyNQQ0MzM2BDQzNDgENDM1MwQ0MzU3BDQzNjAENDM2MwQ0Mzg2BDQzOTIENDM5NAQ0NDI4BDQ0MzQENDQ1NQQ0NDg4BDQ0OTgENDUwOAQ0NTEzBDQ1MjMENDU1NAQ0NjI2BDQ2MjgENDY1NAQ0NjU4BDQ2NzUENDY4NAQ0Njg1BDQ2ODYENDY5MAQ0NzAwBDQ3NDMENDc2NgQ0Nzc0BDQ3OTAENDgxMQQ0ODEyBDQ4MTMENDgzMgQ0ODU2BDQ4NzMENDg4MAQ0ODg5BDQ5MjIENDk2MQQ0OTcwBDQ5NzIENTAwNQQ1MDQxBDUwNzYENTA3OAQ1MDk0BDUwOTkENTEzMwQ1MTM4BDUxNTcENTE2MgQ1MTYzBDUxNzAENTE3NgQ1MTk0BDUxOTcENTIyMQQ1MjU4BDUyNTkENTI2OQQ1MjgzBDUzMDAENTMxNQQ1MzIwBDUzMjYENTMyOQQ1NDAzBDU0MTAENTQxNQQ1NDY0BDU0ODEENTQ5MQQ1NDk2FCsDkANnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnFgECF2QCAw8PFgIfAWdkZAIJDxYCHwFnZAILDxYCHwFnFgJmD2QWBAIBDxAPFggeB0VuYWJsZWRnHwIFCGlkUGVzc29hHwMFCG5tUGVzc29hHwRnFgIfBQUed2lkdGg6IDUwMHB4OyBtYXgtd2lkdGg6IDUwMHB4EBUNFlNlbGVjaW9uZSB1bWEgRW50aWRhZGUfQ8OCTUFSQSBNVU5JQ0lQQUwgREUgQVJBVUPDgVJJQWRDT01QQU5ISUEgQVJBVUNBUklFTlNFIERFIFRSQU5TUE9SVEUgVVJCQU5PICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg+wFDT01QQU5ISUEgREUgREVTRU5WT0xWSU1FTlRPIERFIEFSQVVDw4FSSUEgIChFWFRJTlRPKSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGdDT01QQU5ISUEgTVVOSUNJUEFMIERFIEhBQklUQcOHw4NPIERFIEFSQVVDw4FSSUEgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg+gFDT01QQU5ISUEgTVVOSUNJUEFMIERFIFRSQU5TUE9SVEUgQ09MRVRJVk8gREUgQVJBVUNBUklBIC0gQ01UQy9BUkFVQ0FSSUEgIChFWFRJTlRPKSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZEZVTkRPIERFIFBSRVZJREVOQ0lBIE1VTklDSVBBTCBERSBBUkFVQ0FSSUEgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBnRlVORE8gTVVOSUNJUEFMIERFIEhBQklUQcOHw4NPIERFIEFSQVVDw4FSSUEgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIPsBRlVORE8gTVVOSUNJUEFMIERFIFJFRVFVSVBBTUVOVE8gRE8gQ09SUE8gQk9NQkVJUk9TIERFIEFSQVVDw4FSSUEgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmRlVORE8gTVVOSUNJUEFMIERFIFNBw5pERSBERSBBUkFVQ8OBUklBICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZk1VTklDw41QSU8gREUgQVJBVUPDgVJJQSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIPoBU0VDUkVUQVJJQSBERSBFRFVDQUNBTyBETyBNVU5JQ0lQSU8gREUgQVJBVUNBUklBICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIPoBU0VDUkVUQVJJQSBERSBTQVVERSBETyBNVU5JQ0lQSU8gREUgQVJBVUNBUklBICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIBUNAAQ5NzA1BTE0NzY3BDkyNDEGMTk4NjE3BTEwNzkxBjEwMzI1NAUxNDQzMwUxNDMzMQUxNDQ4OQUxMjE5NgYxNDQ2NzYGMTQ0NzEzFCsDDWdnZ2dnZ2dnZ2dnZ2cWAQIKZAIDDw8WAh8BZ2RkAg8PEA8WCB8GZx8CBQ9pZFRpcG9SZWxhdG9yaW8fAwULZHNSZWxhdG9yaW8fBGdkEBUTF1NlbGVjaW9uZSB1bSBSZWxhdMOzcmlvKlJHRiAtIERlbW9uc3RyYXRpdm8gZGEgRGVzcGVzYSBjb20gUGVzc29hbC9SR0YgLSBEZW1vbnN0cmF0aXZvIGRhIERpc3BvbmliaWxpZGFkZSBkZSBDYWl4YURSR0YgLSBEZW1vbnN0cmF0aXZvIGRhIERpc3BvbmliaWxpZGFkZSBkZSBDYWl4YSBlIGRvcyBSZXN0b3MgYSBQYWdhcjlSR0YgLSBEZW1vbnN0cmF0aXZvIGRhIETDrXZpZGEgQ29uc29saWRhZGEgTMOtcXVpZGEgLSBEQ0w+UkdGIC0gRGVtb25zdHJhdGl2byBkYXMgR2FyYW50aWFzIGUgQ29udHJhZ2FyYW50aWFzIGRlIFZhbG9yZXMvUkdGIC0gRGVtb25zdHJhdGl2byBkYXMgT3BlcmHDp8O1ZXMgZGUgQ3LDqWRpdG9xUkdGIC0gRGVtb25zdHJhdGl2byBkZSBPdXRyYXMgRGVzcGVzYXMgZGUgUGVzc29hbCBkZWNvcnJlbnRlIGRlIENvbnRyYXRvcyBkZSBUZXJjZWlyaXphw6fDo28gKGV4Y2V0byBlbGVtZW50byAzNCkmUkdGIC0gRGVtb25zdHJhdGl2byBkb3MgUmVzdG9zIGEgUGFnYXI5UkdGIC0gRGVtb25zdHJhdGl2byBTaW1wbGlmaWNhZG8gZG8gUmVsYXTDs3JpbyBkZSBHZXN0w6NvHlJSRU8gLSBCYWxhbsOnbyBPcsOnYW1lbnTDoXJpbzFSUkVPIC0gRGVtb25zdHJhdGl2byBkYSBSZWNlaXRhIENvcnJlbnRlIEzDrXF1aWRhUlJSRU8gLSBEZW1vbnN0cmF0aXZvIGRhIFJlY2VpdGEgZGUgQWxpZW5hw6fDo28gZGUgQXRpdm9zIGUgQXBsaWNhw6fDo28gZGUgUmVjdXJzb3N5UlJFTyAtIERlbW9uc3RyYXRpdm8gZGEgUmVjZWl0YSBkZSBJbXBvc3RvcyBMw61xdWlkYSBlIGRhcyBEZXNwZXNhcyBQcsOzcHJpYXMgY29tIEHDp8O1ZXMgZSBTZXJ2acOnb3MgUMO6YmxpY29zIGRlIFNhw7pkZVJSUkVPIC0gRGVtb25zdHJhdGl2byBkYXMgUmVjZWl0YXMgZGUgT3BlcmHDp8O1ZXMgZGUgQ3LDqWRpdG8gZSBEZXNwZXNhcyBkZSBDYXBpdGFsYVJSRU8gLSBEZW1vbnN0cmF0aXZvIGRhcyBSZWNlaXRhcyBlIERlc3Blc2FzIGNvbSBhIE1hbnV0ZW7Dp8OjbyBlIERlc2Vudm9sdmltZW50byBkbyBFbnNpbm8gLSBNREUpUlJFTyAtIERlbW9uc3RyYXRpdm8gZG8gUmVzdWx0YWRvIE5vbWluYWwrUlJFTyAtIERlbW9uc3RyYXRpdm8gZG8gUmVzdWx0YWRvIFByaW3DoXJpbzdSUkVPIC0gRGVtb25zdHJhdGl2byBkb3MgUmVzdWx0YWRvcyBQcmltw6FyaW8gZSBOb21pbmFsFRMAAjIwAjI1AjUyAjIyAjIzAjI0AjMxAjI2AjI3ATcCMTACMTcCMTgCMTYCMTUCMTICMTMCNDcUKwMTZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZxYBAgFkAhUPDxYCHwFnZGQCFw8QDxYEHwRnHwZnZBAVDxBTZWxlY2lvbmUgdW0gQW5vBDIwMjYEMjAyNQQyMDI0BDIwMjMEMjAyMgQyMDIxBDIwMjAEMjAxOQQyMDE4BDIwMTcEMjAxNgQyMDE1BDIwMTQEMjAxMxUPAAQyMDI2BDIwMjUEMjAyNAQyMDIzBDIwMjIEMjAyMQQyMDIwBDIwMTkEMjAxOAQyMDE3BDIwMTYEMjAxNQQyMDE0BDIwMTMUKwMPZ2dnZ2dnZ2dnZ2dnZ2dnFgECAmQCGw8QDxYEHwZnHwFnZBAVDRVTZWxlY2lvbmUgdW0gUGVyw61vZG8HSmFuZWlybwlGZXZlcmVpcm8GTWFyw6dvBUFicmlsBE1haW8FSnVuaG8FSnVsaG8GQWdvc3RvCFNldGVtYnJvB091dHVicm8ITm92ZW1icm8IRGV6ZW1icm8VDQABMQEyATMBNAE1ATYBNwE4ATkCMTACMTECMTIUKwMNZ2dnZ2dnZ2dnZ2dnZ2RkZMYTeaEu66F9Jzj9TKwOKGezo84JtS2PsW2I8ur90V4Z"></span><span style="display: none !important;"><input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="7BD9E610"></span><span style="display: none !important;"><input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="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"></span></form>
+        </div>
+    </div>
+    <footer>
+        <div itemscope="" itemtype="http://data-vocabulary.org/Organization" class="vcard">
+            <div class="titulo">
+                <div class="conteiner">
+                    <a href="#" id="A1">Topo ^</a><span class="nickname">TCE-PR</span> | <span itemprop="name" class="fn org">Tribunal de Contas do Estado do Paraná</span></div>
+            </div>
+            <div class="conteiner">
+                <div class="endereco">
+                    <img src="https://servicos.tce.pr.gov.br/App_Themes/Tema1/imagem/logo-tce-pr-rodape.png" alt="Tribunal de Contas do Estado do Paraná" class="logo">
+                    <div itemprop="address" itemscope="" itemtype="http://data-vocabulary.org/Address" class="adr">
+                        <span itemprop="streetAddress" class="street-address">Praça Nossa Senhora de Salette</span>
+                        s/n - Centro Cívico
+                        <br>
+                        <span itemprop="addressLocality" class="locality">Curitiba</span> - <span itemprop="addressRegion" class="region">PR</span> - CEP <span itemprop="postalCode" class="postal-code">80530-910</span>
+                    </div>
+                    Fone: <span itemprop="telephone" class="tel">41 3350-1616</span> CNPJ 77.996.312/0001-21
+                    <span itemprop="geo" itemscope="" itemtype="http://data-vocabulary.org/​Geo" class="geo">
+                        <span class="latitude">
+                            <meta itemprop="latitude" content="-25.416">
+                            <span class="value-title" title="-25.416"></span></span><span class="longitude">
+                                <meta itemprop="longitude" content="-49.267669">
+                                <span class="value-title" title="-49.267669"></span></span></span>
+                </div>
+                    
+					<div class="busca">
+                    <input id="txtPesquisaRodape" type="text" maxlength="200" onkeydown="if(IsEnterKey(event)){{RedirecionarBusca('txtPesquisaRodape');return false;}}" placeholder="Ex.: Lei orgânica, Instrução Normativa, Regimento Interno...">
+                    <a href="#" title="Buscar" onclick="RedirecionarBusca('txtPesquisaRodape');return false;">Buscar</a></div>
+                    <div class="mobile">
+                    <a href="https://m.tce.pr.gov.br" id="qrCode"><img src="https://www1.tce.pr.gov.br/Imagem/qrCodeMobileMiniatura.png" alt="Versão Mobile"></a>
+						<br><a href="https://m.tce.pr.gov.br">Versão Mobile</a>
+                        </div>
+                    
+                    </div>
+                    </div>
+                    <div style="clear: both;"></div>
+    </footer>
+    <!--[if lte IE 8]></div><![endif]-->
+    <!-- inicio Script do google Analytics  -->
+    <script type="text/javascript">
+        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script><script src="https://ssl.google-analytics.com/ga.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var pageTracker = _gat._getTracker("UA-2108192-1");
+        pageTracker._initData();
+        pageTracker._trackPageview();
+    </script>
+    <!-- fim Script do google Analytics  -->
+
+
+<ul class="ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all" role="listbox" aria-activedescendant="ui-active-menuitem" style="z-index: 1; top: 0px; left: 0px; display: none;"></ul></body></html>
