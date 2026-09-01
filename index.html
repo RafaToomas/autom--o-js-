@@ -1,9 +1,7 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR">
 
 <head>
-
     <meta charset="UTF-8">
 
     <meta
@@ -40,7 +38,8 @@
             background:
                 #123f6d;
 
-            color: white;
+            color:
+                white;
 
             padding:
                 28px 40px;
@@ -192,6 +191,14 @@
         select:focus {
             border-color:
                 #2176ff;
+        }
+
+        select:disabled {
+            background:
+                #f1f5f9;
+
+            cursor:
+                not-allowed;
         }
 
         .campo-largo {
@@ -501,9 +508,7 @@
                 13px;
         }
 
-        /* =================================================
-           HISTÓRICO
-           ================================================= */
+        /* HISTÓRICO */
 
         .historico {
             display:
@@ -699,6 +704,7 @@
                 padding:
                     0 12px;
             }
+
         }
 
     </style>
@@ -740,6 +746,24 @@
         </div>
 
         <div class="grid">
+
+            <!-- TIPO -->
+
+            <div class="campo">
+
+                <label for="tipo">
+                    Tipo do ente
+                </label>
+
+                <select id="tipo">
+
+                    <option value="1">
+                        Município
+                    </option>
+
+                </select>
+
+            </div>
 
             <!-- MUNICÍPIO -->
 
@@ -881,7 +905,7 @@
 
             <button
                 id="btnConsultar"
-                onclick="consultarTCE()"
+                type="button"
             >
                 Consultar TCE-PR
             </button>
@@ -889,7 +913,7 @@
             <button
                 id="btnHistorico"
                 class="botao-historico"
-                onclick="consultarHistorico()"
+                type="button"
             >
                 Consultar histórico 2019–2025
             </button>
@@ -916,7 +940,7 @@
 
 
     <!-- ================================================= -->
-    <!-- RESULTADO INDIVIDUAL -->
+    <!-- RESULTADO -->
     <!-- ================================================= -->
 
     <section class="card">
@@ -942,6 +966,7 @@
 
             </div>
 
+
             <div class="resultado-item">
 
                 <span class="titulo">
@@ -956,6 +981,7 @@
                 </span>
 
             </div>
+
 
             <div class="resultado-item">
 
@@ -974,6 +1000,7 @@
 
         </div>
 
+
         <div class="percentual-box">
 
             <span class="titulo">
@@ -989,12 +1016,14 @@
 
         </div>
 
+
         <div
             id="situacao"
             class="situacao ok"
         >
             Aguardando consulta
         </div>
+
 
         <!-- LIMITES -->
 
@@ -1012,6 +1041,7 @@
 
             </div>
 
+
             <div class="limite">
 
                 <strong>
@@ -1023,6 +1053,7 @@
                 </span>
 
             </div>
+
 
             <div class="limite">
 
@@ -1144,70 +1175,48 @@
     // ELEMENTOS
     // =================================================
 
+    const tipo =
+        document.getElementById("tipo");
+
     const municipio =
-        document.getElementById(
-            "municipio"
-        );
+        document.getElementById("municipio");
 
     const entidade =
-        document.getElementById(
-            "entidade"
-        );
+        document.getElementById("entidade");
 
     const relatorio =
-        document.getElementById(
-            "relatorio"
-        );
+        document.getElementById("relatorio");
 
     const ano =
-        document.getElementById(
-            "ano"
-        );
+        document.getElementById("ano");
 
     const periodo =
-        document.getElementById(
-            "periodo"
-        );
+        document.getElementById("periodo");
 
     const btnConsultar =
-        document.getElementById(
-            "btnConsultar"
-        );
+        document.getElementById("btnConsultar");
 
     const btnHistorico =
-        document.getElementById(
-            "btnHistorico"
-        );
+        document.getElementById("btnHistorico");
 
     const status =
-        document.getElementById(
-            "status"
-        );
+        document.getElementById("status");
 
     const loading =
-        document.getElementById(
-            "loading"
-        );
+        document.getElementById("loading");
 
     const erro =
-        document.getElementById(
-            "erro"
-        );
+        document.getElementById("erro");
 
     const historicoCard =
-        document.getElementById(
-            "historicoCard"
-        );
+        document.getElementById("historicoCard");
 
     const historicoInfo =
-        document.getElementById(
-            "historicoInfo"
-        );
+        document.getElementById("historicoInfo");
 
     const tabelaHistorico =
-        document.getElementById(
-            "tabelaHistorico"
-        );
+        document.getElementById("tabelaHistorico");
+
 
     // =================================================
     // INICIAR
@@ -1218,36 +1227,47 @@
         iniciar
     );
 
+
     async function iniciar() {
 
         try {
 
+            status.textContent =
+                "Conectando ao servidor...";
+
+
             const resposta =
-                await fetch(
-                    "/api/status"
-                );
+                await fetch("/api/status");
+
 
             const dados =
                 await resposta.json();
 
-            if (!dados.sucesso) {
+
+            if (!resposta.ok || !dados.sucesso) {
 
                 throw new Error(
+                    dados.erro ||
                     "Não foi possível iniciar o sistema."
                 );
 
             }
 
+
             preencherAnos(
                 dados.anos
             );
 
+
             await carregarMunicipios();
+
 
             status.textContent =
                 `TCE-PR pronto — ${dados.municipios} municípios carregados.`;
 
-        } catch (e) {
+        }
+
+        catch (e) {
 
             status.textContent =
                 "Erro ao iniciar TCE-PR.";
@@ -1260,6 +1280,7 @@
 
     }
 
+
     // =================================================
     // ANOS
     // =================================================
@@ -1267,6 +1288,7 @@
     function preencherAnos(anos) {
 
         ano.innerHTML = "";
+
 
         anos
             .slice()
@@ -1278,17 +1300,21 @@
                         "option"
                     );
 
+
                 option.value =
                     valor;
 
+
                 option.textContent =
                     valor;
+
 
                 ano.appendChild(
                     option
                 );
 
             });
+
 
         if (anos.length > 0) {
 
@@ -1301,6 +1327,7 @@
 
     }
 
+
     // =================================================
     // MUNICÍPIOS
     // =================================================
@@ -1312,23 +1339,27 @@
                 "/api/municipios"
             );
 
+
         const dados =
             await resposta.json();
 
-        if (!dados.sucesso) {
+
+        if (!resposta.ok || !dados.sucesso) {
 
             throw new Error(
+                dados.erro ||
                 "Erro ao carregar municípios."
             );
 
         }
 
-        municipio.innerHTML =
-            `
+
+        municipio.innerHTML = `
             <option value="">
                 Selecione o município
             </option>
-            `;
+        `;
+
 
         dados.municipios
             .forEach(item => {
@@ -1338,11 +1369,14 @@
                         "option"
                     );
 
+
                 option.value =
                     item.id;
 
+
                 option.textContent =
                     item.nome;
+
 
                 municipio.appendChild(
                     option
@@ -1352,6 +1386,7 @@
 
     }
 
+
     // =================================================
     // MUNICÍPIO ALTERADO
     // =================================================
@@ -1360,31 +1395,35 @@
         "change",
         async function() {
 
-            entidade.innerHTML =
-                `
+            esconderErro();
+
+
+            entidade.innerHTML = `
                 <option value="">
                     Carregando entidades...
                 </option>
-                `;
+            `;
 
-            relatorio.innerHTML =
-                `
+
+            relatorio.innerHTML = `
                 <option value="">
                     Selecione a entidade primeiro
                 </option>
-                `;
+            `;
+
 
             if (!municipio.value) {
 
-                entidade.innerHTML =
-                    `
+                entidade.innerHTML = `
                     <option value="">
                         Selecione o município primeiro
                     </option>
-                    `;
+                `;
 
                 return;
+
             }
+
 
             try {
 
@@ -1393,10 +1432,12 @@
                         `/api/entidades?municipio=${encodeURIComponent(municipio.value)}`
                     );
 
+
                 const dados =
                     await resposta.json();
 
-                if (!dados.sucesso) {
+
+                if (!resposta.ok || !dados.sucesso) {
 
                     throw new Error(
                         dados.erro ||
@@ -1405,12 +1446,13 @@
 
                 }
 
-                entidade.innerHTML =
-                    `
+
+                entidade.innerHTML = `
                     <option value="">
                         Selecione a entidade
                     </option>
-                    `;
+                `;
+
 
                 dados.entidades
                     .forEach(item => {
@@ -1420,11 +1462,14 @@
                                 "option"
                             );
 
+
                         option.value =
                             item.id;
 
+
                         option.textContent =
                             item.nome;
+
 
                         entidade.appendChild(
                             option
@@ -1432,7 +1477,9 @@
 
                     });
 
-            } catch (e) {
+            }
+
+            catch (e) {
 
                 mostrarErro(
                     e.message
@@ -1443,6 +1490,7 @@
         }
     );
 
+
     // =================================================
     // ENTIDADE ALTERADA
     // =================================================
@@ -1451,24 +1499,28 @@
         "change",
         async function() {
 
-            relatorio.innerHTML =
-                `
+            esconderErro();
+
+
+            relatorio.innerHTML = `
                 <option value="">
                     Carregando relatórios...
                 </option>
-                `;
+            `;
+
 
             if (!entidade.value) {
 
-                relatorio.innerHTML =
-                    `
+                relatorio.innerHTML = `
                     <option value="">
                         Selecione a entidade primeiro
                     </option>
-                    `;
+                `;
 
                 return;
+
             }
+
 
             try {
 
@@ -1477,10 +1529,12 @@
                         `/api/relatorios?municipio=${encodeURIComponent(municipio.value)}&entidade=${encodeURIComponent(entidade.value)}`
                     );
 
+
                 const dados =
                     await resposta.json();
 
-                if (!dados.sucesso) {
+
+                if (!resposta.ok || !dados.sucesso) {
 
                     throw new Error(
                         dados.erro ||
@@ -1489,12 +1543,13 @@
 
                 }
 
-                relatorio.innerHTML =
-                    `
+
+                relatorio.innerHTML = `
                     <option value="">
                         Selecione o relatório
                     </option>
-                    `;
+                `;
+
 
                 dados.relatorios
                     .forEach(item => {
@@ -1504,11 +1559,14 @@
                                 "option"
                             );
 
+
                         option.value =
                             item.id;
 
+
                         option.textContent =
                             item.nome;
+
 
                         relatorio.appendChild(
                             option
@@ -1516,8 +1574,9 @@
 
                     });
 
+
                 // Tenta selecionar automaticamente
-                // o relatório de Despesa com Pessoal
+                // o relatório de despesa com pessoal
 
                 const opcao =
                     Array.from(
@@ -1531,6 +1590,7 @@
                                 )
                     );
 
+
                 if (opcao) {
 
                     relatorio.value =
@@ -1538,7 +1598,9 @@
 
                 }
 
-            } catch (e) {
+            }
+
+            catch (e) {
 
                 mostrarErro(
                     e.message
@@ -1549,13 +1611,21 @@
         }
     );
 
+
     // =================================================
-    // CONSULTA INDIVIDUAL
+    // CONSULTAR
     // =================================================
+
+    btnConsultar.addEventListener(
+        "click",
+        consultarTCE
+    );
+
 
     async function consultarTCE() {
 
         esconderErro();
+
 
         if (!municipio.value) {
 
@@ -1564,7 +1634,9 @@
             );
 
             return;
+
         }
+
 
         if (!entidade.value) {
 
@@ -1573,7 +1645,9 @@
             );
 
             return;
+
         }
+
 
         if (!relatorio.value) {
 
@@ -1582,7 +1656,9 @@
             );
 
             return;
+
         }
+
 
         if (!ano.value) {
 
@@ -1591,7 +1667,9 @@
             );
 
             return;
+
         }
+
 
         if (!periodo.value) {
 
@@ -1600,7 +1678,9 @@
             );
 
             return;
+
         }
+
 
         btnConsultar.disabled =
             true;
@@ -1614,7 +1694,21 @@
         status.textContent =
             "Consultando TCE-PR...";
 
+
         try {
+
+            /*
+             * IMPORTANTE:
+             *
+             * O server.js possui:
+             *
+             * GET /consultar
+             *
+             * Portanto NÃO usamos:
+             *
+             * POST /api/consulta
+             *
+             */
 
             const url =
                 `/consultar?` +
@@ -1624,13 +1718,16 @@
                 `&ano=${encodeURIComponent(ano.value)}` +
                 `&periodo=${encodeURIComponent(periodo.value)}`;
 
+
             const resposta =
                 await fetch(url);
+
 
             const dados =
                 await resposta.json();
 
-            if (!dados.sucesso) {
+
+            if (!resposta.ok || !dados.sucesso) {
 
                 throw new Error(
                     dados.erro ||
@@ -1639,14 +1736,35 @@
 
             }
 
+
+            /*
+             * O server.js retorna:
+             *
+             * {
+             *   sucesso: true,
+             *   dados: {
+             *      rcl,
+             *      rclAjustada,
+             *      dtp,
+             *      percentual,
+             *      ...
+             *   }
+             * }
+             *
+             * Por isso usamos dados.dados.
+             */
+
             mostrarResultado(
                 dados.dados
             );
 
+
             status.textContent =
                 "Consulta concluída.";
 
-        } catch (e) {
+        }
+
+        catch (e) {
 
             status.textContent =
                 "Erro na consulta.";
@@ -1655,7 +1773,9 @@
                 e.message
             );
 
-        } finally {
+        }
+
+        finally {
 
             btnConsultar.disabled =
                 false;
@@ -1665,17 +1785,26 @@
 
             loading.style.display =
                 "none";
+
         }
 
     }
 
+
     // =================================================
-    // CONSULTAR HISTÓRICO
+    // HISTÓRICO
     // =================================================
+
+    btnHistorico.addEventListener(
+        "click",
+        consultarHistorico
+    );
+
 
     async function consultarHistorico() {
 
         esconderErro();
+
 
         if (!municipio.value) {
 
@@ -1684,7 +1813,9 @@
             );
 
             return;
+
         }
+
 
         if (!entidade.value) {
 
@@ -1693,7 +1824,9 @@
             );
 
             return;
+
         }
+
 
         if (!relatorio.value) {
 
@@ -1702,11 +1835,9 @@
             );
 
             return;
+
         }
 
-        // =================================================
-        // PREPARAR INTERFACE
-        // =================================================
 
         btnConsultar.disabled =
             true;
@@ -1717,17 +1848,22 @@
         loading.style.display =
             "inline";
 
+
         status.textContent =
             "Consultando histórico 2019–2025...";
+
 
         historicoCard.style.display =
             "block";
 
+
         historicoInfo.textContent =
             "Consultando os anos de 2019 até 2025. Isso pode levar alguns minutos.";
 
+
         tabelaHistorico.innerHTML =
             "";
+
 
         try {
 
@@ -1740,13 +1876,16 @@
                 `&anoInicial=2019` +
                 `&anoFinal=2025`;
 
+
             const resposta =
                 await fetch(url);
+
 
             const dados =
                 await resposta.json();
 
-            if (!dados.sucesso) {
+
+            if (!resposta.ok || !dados.sucesso) {
 
                 throw new Error(
                     dados.erro ||
@@ -1755,29 +1894,38 @@
 
             }
 
+
             mostrarHistorico(
                 dados.dados
             );
 
+
             historicoInfo.textContent =
                 `Consulta de ${dados.anoInicial} até ${dados.anoFinal} concluída.`;
+
 
             status.textContent =
                 "Histórico concluído.";
 
-        } catch (e) {
+        }
+
+        catch (e) {
 
             status.textContent =
                 "Erro na consulta histórica.";
 
+
             historicoInfo.textContent =
                 "Não foi possível concluir a consulta histórica.";
+
 
             mostrarErro(
                 e.message
             );
 
-        } finally {
+        }
+
+        finally {
 
             btnConsultar.disabled =
                 false;
@@ -1787,12 +1935,14 @@
 
             loading.style.display =
                 "none";
+
         }
 
     }
 
+
     // =================================================
-    // MOSTRAR RESULTADO INDIVIDUAL
+    // MOSTRAR RESULTADO
     // =================================================
 
     function mostrarResultado(dados) {
@@ -1803,11 +1953,13 @@
             "R$ " +
             dados.rclFormatada;
 
+
         document.getElementById(
             "rclAjustada"
         ).textContent =
             "R$ " +
             dados.rclAjustadaFormatada;
+
 
         document.getElementById(
             "dtp"
@@ -1815,10 +1967,12 @@
             "R$ " +
             dados.dtpFormatado;
 
+
         document.getElementById(
             "percentual"
         ).textContent =
             dados.percentualFormatado;
+
 
         document.getElementById(
             "limiteAlerta"
@@ -1827,12 +1981,14 @@
                 .toString()
                 .replace(".", ",")}% — R$ ${dados.limiteAlertaFormatado}`;
 
+
         document.getElementById(
             "limitePrudencial"
         ).textContent =
             `${dados.limitePrudencialPercentual
                 .toString()
                 .replace(".", ",")}% — R$ ${dados.limitePrudencialFormatado}`;
+
 
         document.getElementById(
             "limiteMaximo"
@@ -1841,13 +1997,16 @@
                 .toString()
                 .replace(".", ",")}% — R$ ${dados.limiteMaximoFormatado}`;
 
+
         const situacao =
             document.getElementById(
                 "situacao"
             );
 
+
         situacao.className =
             "situacao";
+
 
         if (
             dados.situacao ===
@@ -1858,7 +2017,9 @@
                 "maximo"
             );
 
-        } else if (
+        }
+
+        else if (
             dados.situacao ===
             "LIMITE PRUDENCIAL"
         ) {
@@ -1867,7 +2028,9 @@
                 "prudencial"
             );
 
-        } else if (
+        }
+
+        else if (
             dados.situacao ===
             "LIMITE DE ALERTA"
         ) {
@@ -1876,7 +2039,9 @@
                 "alerta"
             );
 
-        } else {
+        }
+
+        else {
 
             situacao.classList.add(
                 "ok"
@@ -1884,9 +2049,12 @@
 
         }
 
+
         situacao.textContent =
             dados.situacao;
+
     }
+
 
     // =================================================
     // MOSTRAR HISTÓRICO
@@ -1897,6 +2065,7 @@
         tabelaHistorico.innerHTML =
             "";
 
+
         dados.forEach(
             item => {
 
@@ -1904,6 +2073,7 @@
                     document.createElement(
                         "tr"
                     );
+
 
                 tr.innerHTML = `
 
@@ -1957,13 +2127,16 @@
 
                 `;
 
+
                 tabelaHistorico.appendChild(
                     tr
                 );
 
             }
         );
+
     }
+
 
     // =================================================
     // CLASSE EVOLUÇÃO
@@ -1976,70 +2149,90 @@
             valor === undefined ||
             Number.isNaN(Number(valor))
         ) {
+
             return "evolucao-neutra";
+
         }
+
 
         if (
             Number(valor) > 0
         ) {
+
             return "evolucao-positiva";
+
         }
+
 
         if (
             Number(valor) < 0
         ) {
+
             return "evolucao-negativa";
+
         }
 
+
         return "evolucao-neutra";
+
     }
+
 
     // =================================================
     // CLASSE SITUAÇÃO
     // =================================================
 
-    function classeSituacao(
-        situacao
-    ) {
+    function classeSituacao(situacao) {
 
         if (
             situacao ===
             "ACIMA DO LIMITE MÁXIMO"
         ) {
+
             return "maximo";
+
         }
+
 
         if (
             situacao ===
             "LIMITE PRUDENCIAL"
         ) {
+
             return "prudencial";
+
         }
+
 
         if (
             situacao ===
             "LIMITE DE ALERTA"
         ) {
+
             return "alerta";
+
         }
 
+
         return "ok";
+
     }
+
 
     // =================================================
     // ERRO
     // =================================================
 
-    function mostrarErro(
-        mensagem
-    ) {
+    function mostrarErro(mensagem) {
 
         erro.textContent =
             mensagem;
 
         erro.style.display =
             "block";
+
     }
+
 
     function esconderErro() {
 
@@ -2048,6 +2241,7 @@
 
         erro.style.display =
             "none";
+
     }
 
 </script>
